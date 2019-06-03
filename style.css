@@ -1,0 +1,269 @@
+/* ∞∞ global ∞∞ */
+* {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-color: inherit;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  /*background: linear-gradient(-45deg, #9d5761, #ff5959);*/
+  background-image: url('Assets/m-bg.png');
+  background-repeat: no-repeat;
+  font-size: 100%;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1;
+  padding: 5px;
+}
+
+header {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.instruction {
+  position: relative;
+  top: 40vh;
+  width: 80vw;
+  margin: 0 auto;
+  font-size: .8rem;
+  text-align: center;
+}
+
+.instruction-3 {
+  position: relative;
+  top: 25vh;
+  width: 80vw;
+  margin: 0 auto;
+  font-size: .8rem;
+  text-align: center;
+}
+
+.scroll-container-flex{
+  position: relative;
+  top: 50vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  height: auto;
+  margin: 0 auto;
+  width: 100%;
+}
+
+
+.num-opt {
+  flex: 0 0 auto;
+  font-size: 6rem;
+  margin-right: 50px;
+}
+.num-opt:hover {
+  font-size: 8rem;
+  font-weight: bold;
+}
+
+.input-container-flex {
+  position: relative;
+  top: 50vh;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  align-items: center;
+  width: 100%;
+}
+
+.search-box {
+  border-radius: 3px;
+  width: 60vw;
+  height: 8vh;
+  margin-bottom: 10px;
+}
+
+.calc-button {
+  width: 70vw;
+  height: 5vh;
+  border-radius: 5px;
+}
+
+.search-button {
+  width: 90vw;
+  height: 5vh;
+  border-radius: 5px;
+}
+
+.calc-button {
+  display: block;
+  margin: 0 auto;
+  top: 30vh;
+  position: relative;
+}
+
+.card-container {
+  position: relative;
+  transition: 0.3s;
+  min-width: 45%;
+  max-width: 45%;
+  margin: 10px;
+  border-radius: 15px;
+}
+
+.card-rotate {
+  transform: rotateY(180deg);
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.97);
+  border-radius: 15px;
+
+}
+
+.card-front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-back {
+  position: absolute;
+  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  transform: rotateY(180deg);
+  border-radius: 15px;
+
+}
+
+img {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  height: 50%;
+}
+
+.back-message {
+  width: 85%;
+  position: relative;
+  margin: 0 auto;
+  top: 30%;
+}
+
+.container {
+  height: 50%;
+  background-color: white;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+}
+
+.results-container-flex {
+  position: relative;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  top: 32vh;
+  min-height: 50vh;
+}
+
+p {
+  font-weight: 600;
+}
+
+.container {
+  font-size: .8rem;
+}
+
+.condition {
+  font-size: .5rem;
+  width: 20vh;
+  height: 8vh;
+  appearance: none;
+  display: inline-block;
+
+}
+
+li:hover {
+  cursor: pointer;
+}
+
+.inner-input-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.total-view-flex, .item-view-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 85%;
+}
+
+.nav-ul-flex {
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  height: 100%;
+  width: 60vw;
+  top: -3vh;
+  right: 5vw;
+  font-size: .9rem;
+}
+
+li {
+  display: block;
+}
+
+.price {
+  grid-row-start: 3;
+}
+
+.total-buy-prices-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas: "a b c d e";
+  background-color: white;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.97);
+
+}
+
+.total-trade-prices-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  background-color: white;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.97);
+}
+
+.conditions {
+  font-size: .8rem;
+  min-width: 20%;
+}
+
+.step-4 {
+  height: 100vh;
+}
+
+.nav-item:hover {
+  cursor: pointer;
+  color: black;
+}

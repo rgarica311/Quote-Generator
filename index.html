@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" content="text/css" href="style.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>USED GEAR PRICE GENERATOR</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="index.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
+
+
+
+
+</head>
+<body>
+
+<header>
+  <h3 class="logo">Quote Gen</h3>
+</header>
+
+<section class="step-1" style="display: block">
+
+<div class="instruction">How many items do you want to quote?</div>
+
+<div class="scroll-container-flex">
+   <div id="1" class="num-opt">1</div>
+   <div id="2" class="num-opt">2</div>
+   <div id="3" class="num-opt">3</div>
+   <div id="4" class="num-opt">4</div>
+   <div id="5" class="num-opt">5</div>
+   <div id="6" class="num-opt">6</div>
+   <div id="7" class="num-opt">7</div>
+</div>
+
+</section>
+
+<section class="step-2" style="display: none">
+  <div class="instruction">Search for items</div>
+
+  <div class="input-container-flex">
+
+    <button type="button" class="search-button">Search</button>
+
+  </div>
+
+
+
+</section>
+
+<section class="step-3" style="display: none">
+  <div class="instruction-3">Select results you wish to omit from quote calculation</div>
+
+  <button type="button" class="calc-button">Calculate</button>
+
+
+
+  <div class="results-container-flex">
+
+
+  </div>
+
+</section>
+
+
+<section class="step-4" style="display: none">
+  <nav class="views">
+    <ul class="nav-ul-flex">
+      <li class="nav-item total">Total View</li>
+      <li class="nav-item item">Item View</li>
+    </ul>
+  </nav>
+
+  <div class="total-view-flex" style="display: none">
+    <h2>Buy</h2>
+    <div class="total-buy-prices-grid">
+    </div>
+    <h2>Trade</h2>
+    <div class="total-trade-prices-grid">
+    </div>
+
+  </div>
+
+  <div class="item-view-flex" style="display: none">
+    <h2>Item View</h2>
+    <div class="item-buy-prices-grid">
+    </div>
+    <h2>Item View</h2>
+    <div class="item-trade-prices-grid">
+    </div>
+
+  </div>
+
+
+</section>
+
+
+
+
+</body>
+</html>
