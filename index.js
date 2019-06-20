@@ -1843,17 +1843,35 @@ function createTradeGhost() {
   ghostSpan.style.dispaly = "none";
   ghostSpan.innerHTML = "Original Offer " + Math.round(totalTradeSum);
 }*/
+//import axios, {AxiosPromise, AxiosResponse} from 'axios'
+//let axios = require('./node_modules/axios')
+
+
 
 var selectedNum;
 let processDataCalledTimes = 0;
 let x = 0;
-function processData(result) {
+
+function processData(result, id) {
+  console.log('gear in processData', gear)
+  //console.log(`result is ${result}`)
+  //console.log(`searchid: ${JSON.stringify(searchId)}`)
+
+  //let responseData = JSON.stringify(result)
+  //responseData.push(JSON.stringify(result))
+  //console.log(`responseData in processData: ${responseData}`)
+
+  let searchResultsElements = $('.results-container-flex').children()
 
     processDataCalledTimes++
-    const items = result.findCompletedItemsResponse[0].searchResult[0].item || [];
+    let items = result.findCompletedItemsResponse[0].searchResult[0].item || [];
+    //let items = Object.keys(result.findCompletedItemsResponse[0].searchResult[0].item || [])
+    console.log(`items is ${items}`)
     for (let j=0; j < items.length; ++j) {
         var item = items[j];
         var title = item.title;
+        //let title = Object.keys(findCompletedItemsResponse[0].searchResult[0].item)
+        console.log(`title: ${title}`)
         var pic = item["galleryURL"];
         var viewitem = item.viewItemURL;
         var soldPrice = item.sellingStatus[0].convertedCurrentPrice[0]["__value__"];
@@ -1874,24 +1892,89 @@ function processData(result) {
         var pass6 = "SHUTTER";
         var pass7= "Shutter";
         if (null != title && null != viewitem && soldPrice != null) {
+          //console.log(`running first if block`)
           if (itemName.includes(test1) || itemName.includes(test2) || itemName.includes(test3) || itemName.includes(test4) || itemName.includes(test5)) {
-            console.log(`test case found`)
-            if (itemName.includes(pass1) || itemName.includes(pass2) || itemName.includes(pass3) || itemName.includes(pass4) || itemName.includes(pass5) || itemName.includes(pass6) || itemName.includes(pass7)) {
-              console.log(`pass case found and added: card${x}`)
-              $('.results-container-flex').append(`<div class="card-container"><div id="card${x}" class="card"><div class="card-front"><img class="pic" alt="item picture" src="${pic}" style="width:100%"><div class="container"><span>${itemName}<br></span><p><br>Sold Price:<span class="price">${soldPrice}</span></p></div><div class="card-back"><div class="back-message">Item excluded from calculaton. Click again to include in final calculation.</div></div></div></div></div>`)
+            //console.log(`test case found`)
+            if (itemName.includes(pass1) || itemName.includes(pass2) || itemName.includes(pass3) || itemName.includes(pass4) || itemName.includes(pass5) || itemName.includes(pass6) || itemName.includes(pass7) ) {
+              //console.log(`pass case found and added: card${x}`)
+              searchResultsElements.each(function(item, index){
+                //console.log(`item is: ${item}, index is: ${index}`)
+                console.log('index in searchlements each function', index)
+
+                  if(index == id) {
+                    //console.log(`index is ${index}`)
+                    item.append(`<div class="card-container" ontouchstart="this.classList.toggle('hover');">
+                      <div id="card${x}" class="card">
+                        <div class="card-front">
+                          <img class="pic" alt="item picture" src="${pic}" style="width:100%">
+                          <div class="container">
+                            <span>${itemName}<br></span>
+                            <p><br>Sold Price:<span class="price">${soldPrice}</span></p>
+                          </div>
+                        </div>
+                        <div class="card-back">
+                          <div class="back-message">Item excluded from calculaton. Click again to include in final calculation.</div>
+                        </div>
+                      </div>
+                    </div>`)
+                    //$('.results-container-flex').append(`<div class="card-container"><div id="card${x}" class="card"><div class="card-front"><img class="pic" alt="item picture" src="${pic}" style="width:100%"><div class="container"><span>${itemName}<br></span><p><br>Sold Price:<span class="price">${soldPrice}</span></p></div><div class="card-back"><div class="back-message">Item excluded from calculaton. Click again to include in final calculation.</div></div></div></div></div>`)
+                  }
+
+
+              })
               x++
             }
           } else {
+              function htmlDecode(input) {
+                let e = document.createElement('div')
+                e.innerHTML = input
+                return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+              }
+              searchResultsElements.each(function(index, item){
+                //console.log(`running else`)
+                //console.log(`index is ${index}, item is: ${item.toString()}`)
+                //console.log(`serchId type is: ${typeof(searchId)}`)
+                //console.log(`index type is: ${typeof(index)}`)
+
+                //console.log(`searchid: ${JSON.stringify(searchId)}`)
+
+                //console.log('item name before if statement', itemName)
+                //console.log('gear[0] before if', gear[0])
+
+                if(index == id) {
+                  //console.log('gear index includes item name')
+                  //console.log(`index is ${index}`)
+                  //let mystring = '&lt;div&gt;test&lt;/div&gt;'
+                  let htmlString = `&lt;div class="card-container" ontouchstart="this.classList.toggle('hover');"&gt;
+                    &lt;div id="card${x}" class="card"&gt;
+                      &lt;div class="card-front"&gt;
+                        &lt;img class="pic" alt="item picture" src="${pic}" style="width:100%"&gt;
+                        &lt;div class="container"&gt;
+                          &lt;span&gt;${itemName}&lt;br&gt;&lt;/span&gt;
+                          &lt;p&gt;&lt;br&gt;Sold Price:&lt;span class="price"&gt;${soldPrice}&lt;/span>&lt;/p&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                      &lt;div class="card-back"&gt;
+                        &lt;div class="back-message"&gt;Item excluded from calculaton. Click again to include in final calculation.&lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;`
+                  htmlString = $('<div />').html(htmlString).text()
+                  $(item).append(htmlString)
+                  //item.append(`<div class="card-container"><div id="card${x}" class="card"><div class="card-front"><img class="pic" alt="item picture" src="${pic}" style="width:100%"><div class="container"><span>${itemName}<br></span><p><br>Sold Price:<span class="price">${soldPrice}</span></p></div><div class="card-back"><div class="back-message">Item excluded from calculaton. Click again to include in final calculation.</div></div></div></div></div>`)
+                  //$('.results-container-flex').append(`<div class="card-container"><div id="card${x}" class="card"><div class="card-front"><img class="pic" alt="item picture" src="${pic}" style="width:100%"><div class="container"><span>${itemName}<br></span><p><br>Sold Price:<span class="price">${soldPrice}</span></p></div><div class="card-back"><div class="back-message">Item excluded from calculaton. Click again to include in final calculation.</div></div></div></div></div>`)
+                }
+              })
               console.log(`x is ${x}`)
-              $('.results-container-flex').append(`<div class="card-container"><div id="card${x}" class="card"><div class="card-front"><img alt="item picture" src="${pic}" style="width:100%"><div class="container"><span>${itemName}<br></span><p><br>Sold Price:<span class="price">${soldPrice}</span></p></div></div><div class="card-back"><div class="back-message">Item excluded from calculaton. Click again to include in final calculation.</div></div></div></div>`)
+              //$('.results-container-flex').append(`<div class="card-container"><div id="card${x}" class="card"><div class="card-front"><img alt="item picture" src="${pic}" style="width:100%"><div class="container"><span>${itemName}<br></span><p><br>Sold Price:<span class="price">${soldPrice}</span></p></div></div><div class="card-back"><div class="back-message">Item excluded from calculaton. Click again to include in final calculation.</div></div></div></div>`)
               x++
            }
        }
     }
     console.log(`selectedNum in prdata is ${selectedNum}`)
     console.log(`processdatacalledtimes in prdata is ${processDataCalledTimes}`)
-    console.log(`selectedNum type in prdata is ${typeof(selectedNum)}`)
-    console.log(`processdatacalledtimes type in prdata is ${typeof(processDataCalledTimes)}`)
+    //console.log(`selectedNum type in prdata is ${typeof(selectedNum)}`)
+    //console.log(`processdatacalledtimes type in prdata is ${typeof(processDataCalledTimes)}`)
     if (processDataCalledTimes === parseInt(selectedNum)) {
       console.log(`done processing data`)
       getPrices()
@@ -1930,25 +2013,25 @@ function getBuyPrice(avg, condition) {
 function getTrdPrice(avg, condition) {
     switch (condition) {
       case "pom":
-        return Math.round(avg * .30);
+        return Math.round(avg * .35);
         break;
       case "ulw":
-        return Math.round(avg * .275);
+        return Math.round(avg * .30);
         break;
 
       case "umw":
-        return Math.round(avg * .25);
+        return Math.round(avg * .275);
         break;
 
       case "uhw":
-        return Math.round(avg * .225);
+        return Math.round(avg * .25);
         break;
 
       case "usf":
-        return Math.round(avg * .20);
+        return Math.round(avg * .225);
         break;
       default:
-        return Math.round(avg * .30);
+        return Math.round(avg * .35);
 
     }
     return trdPrice;
@@ -1958,27 +2041,27 @@ function calculate(arr){
 
   console.log(`calculate function running before loop: prices is ${arr}`)
   const reducer = (accumulator, currentValue) => accumulator + currentValue
-  $('.calc-button').on('click', function(){
-    toggleDisplay('.step-3')
-    toggleDisplay('.step-4')
-    for (i=0; i<arr.length; i++) {
-      console.log(`${arr[i]} type is ${typeof i}`)
-      if(arr[i] === undefined) {
-        arr.splice(i, 1)
-      }
+
+  toggleDisplay('.step-3')
+  toggleDisplay('.step-4')
+  for (i=0; i<arr.length; i++) {
+    console.log(`${arr[i]} type is ${typeof i}`)
+    if(arr[i] === undefined) {
+      arr.splice(i, 1)
     }
-    console.log(`prices list for math after loop is ${arr}`)
-    let totalSum = arr.reduce(reducer)
-    let avgPrice = totalSum / arr.length
-    toggleDisplay('.total-view-flex')
+  }
+  console.log(`prices list for math after loop is ${arr}`)
+  let totalSum = arr.reduce(reducer)
+  let avgPrice = totalSum / arr.length
+  toggleDisplay('.total-view-flex')
 
 
 
-    $('.total-buy-prices-grid').append(`<span class="conditions">Pre-owned Mint</span><span class="conditions">Used Light Wear</span><span class="conditions">Used Medium Wear</span><span class="conditions">Used Heavy Wear</span><span class="conditions">Used Semi-functional</span><span class="price">${getBuyPrice(avgPrice,"pom")}</span><span class="price">${getBuyPrice(avgPrice,"ulw")}</span><span class="price">${getBuyPrice(avgPrice,"umw")}</span><span class="price">${getBuyPrice(avgPrice,"uhw")}</span><span class="price">${getBuyPrice(avgPrice,"usf")}</span>`)
-    $('.total-trade-prices-grid').append(`<span class="conditions">Pre-owned Mint</span><span class="conditions">Used Light Wear</span><span class="conditions">Used Medium Wear</span><span class="conditions">Used Heavy Wear</span><span class="conditions">Used Semi-functional</span><span class="price">${getTrdPrice(avgPrice,"pom")}</span><span class="price">${getTrdPrice(avgPrice,"ulw")}</span><span class="price">${getTrdPrice(avgPrice,"umw")}</span><span class="price">${getTrdPrice(avgPrice,"uhw")}</span><span class="price">${getTrdPrice(avgPrice,"usf")}</span>`)
-    console.log(`totalSum is ${totalSum}`)
-    console.log(`avgPrice is ${avgPrice}`)
-  })
+  $('.total-buy-prices-grid').append(`<span class="conditions">Pre-owned Mint</span><span class="conditions">Used Light Wear</span><span class="conditions">Used Medium Wear</span><span class="conditions">Used Heavy Wear</span><span class="conditions">Used Semi-functional</span><span class="price">${getBuyPrice(avgPrice,"pom")}</span><span class="price">${getBuyPrice(avgPrice,"ulw")}</span><span class="price">${getBuyPrice(avgPrice,"umw")}</span><span class="price">${getBuyPrice(avgPrice,"uhw")}</span><span class="price">${getBuyPrice(avgPrice,"usf")}</span>`)
+  $('.total-trade-prices-grid').append(`<span class="conditions">Pre-owned Mint</span><span class="conditions">Used Light Wear</span><span class="conditions">Used Medium Wear</span><span class="conditions">Used Heavy Wear</span><span class="conditions">Used Semi-functional</span><span class="price">${getTrdPrice(avgPrice,"pom")}</span><span class="price">${getTrdPrice(avgPrice,"ulw")}</span><span class="price">${getTrdPrice(avgPrice,"umw")}</span><span class="price">${getTrdPrice(avgPrice,"uhw")}</span><span class="price">${getTrdPrice(avgPrice,"usf")}</span>`)
+  console.log(`totalSum is ${totalSum}`)
+  console.log(`avgPrice is ${avgPrice}`)
+
 
   $('.total').on('click', function(e){
     e.stopPropagation()
@@ -2004,7 +2087,7 @@ function calculate(arr){
 
 function handleCardClick(prices) {
   let i = 0;
-  calculate(prices)
+
   console.log(`${i}nth run has class card-rotate: prices now contains ${prices}`)
 
   $('.results-container-flex').on('click', '.card', function(e){
@@ -2028,12 +2111,25 @@ function handleCardClick(prices) {
         console.log(`adding ${clickedPrice} back to list: prices now contains ${prices}`)
     }
 
+  })
 
+  $('.calc-button').on('click', function(){
+    calculate(prices)
   })
 
 }
 
+function SearchObject(url, id, term) {
+  this.url = url
+  this.id = id
+  this.term = term
+}
+
+let searchUrls = [];
+
 function getPrices() {
+  toggleDisplay('.step-2')
+  toggleDisplay('.step-3')
 
   const prices = []
 
@@ -2049,16 +2145,16 @@ function getPrices() {
 
 let callScriptCounter = 0;
 
-let makeCallScript = function(uri) {
+/*let makeCallScript = function(uri) {
   callScriptCounter++
   s = document.createElement('script');
   s.src = uri;
   document.body.appendChild(s);
-}
+}*/
 
 let getDataCounter = 0;
 
-function getData(uri) {
+/*function getData(uri) {
   console.log(`selectedNum in getdata is ${selectedNum}`)
   console.log(`processdatacalledtimes in getdata is ${processDataCalledTimes}`)
 
@@ -2076,33 +2172,114 @@ function getData(uri) {
       }, 300)
   }
 
+}*/
+
+
+
+async function getData(searchObj) {
+
+  let response = await fetchJsonp(searchObj.url)
+  let data = await response.json()
+  console.log(data)
+  processData(data, searchObj.id)
+
+
+
+  /*fetchJsonp(searchObj.url, {
+    timeout: 6000,
+  })
+  .then(function(response) {
+    console.log(response.json())
+  }).then(function(json) {
+      console.log('parsed json', json.findCompletedItemsResponse[0].searchResult[0].item)
+      //processData(searchObj.id, json)
+  }).catch(function(ex) {
+    console.log('parsing failed', ex)
+  })*/
+
+  /*callScriptCounter++
+  s = document.createElement('script');
+  s.src = searchObj.url;
+  document.body.appendChild(s);*/
+
+  /*axios.get(searchObj.url).then(res => {
+    console.log(`response: ${res.data}`)
+    res.data = res.data.slice(16)
+    let response = res.data.slice(0,  -1)
+    processData(JSON.parse(response), searchObj.id)
+  })*/
 }
 
-function buildRequestUrl(gear) {
-    //this isnt working bc the function runs twice and resets to none state
+
+/*async function getData(searchObj) {
+
+  console.log(`running getdata`)
+
+  const response = await fetch(searchObj.url)
+
+  const data = await response.json()
+
+  console.log(`data: ${data}`)
+  console.dir(`searchObj is ${searchObj}`)
+  console.log(`searchObj url is ${searchObj.url}`)
+
+  console.log(`response data is ${response}`)
+  //processData(searchObj.id, data)
+
+  /*fetch(searchObj.url).then(res => {
+    console.log(`fetch res is ${res}`)
+
+    processData(searchObj.id, res)
+  })
+}*/
+
+function buildRequestUrl(item) {
     toggleDisplay('.step-2')
     toggleDisplay('.step-3')
-    baseURL = "http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&SERVICE-VERSION=1.7.0&SECURITY-APPNAME=RoryGarc-priceGen-PRD-55d8a3c47-c767674d&GLOBAL-ID=EBAY-US&RESPONSE-DATA-FORMAT=JSONP&callback=processData&REST-PAYLOAD&keywords=";
+    baseURL = "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&SERVICE-VERSION=1.7.0&SECURITY-APPNAME=RoryGarc-priceGen-PRD-55d8a3c47-c767674d&GLOBAL-ID=EBAY-US&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=";
     endURL = "&itemFilter(0).name=Condition&itemFilter(0).value=3000&itemFilter(1).name=SoldItemsOnly&itemFilter(1).value=true&paginationInput.entriesPerPage=10&paginationInput.pageNumber=1";
+    let requestUrl = baseURL.concat(item.split(' ').join('+'), endURL);
+    console.log(`requestUrl: ${requestUrl}`)
+    return requestUrl
 
-    for (let i=0, j=0; i<gear.length; i++ ) {
+
+    /*for (let i=0, j=0; i<gear.length; i++ ) {
       let requestUrl = baseURL.concat(gear[i].split(' ').join('+'), endURL);
+      searchUrls.push(requestUrl)
+      //getData(requestUrl)
+    }*/
 
-       getData(requestUrl)
-    }
 }
+
+let test = "test"
+test
+
+const gear = []
 
 function getSearchTerms(numTerms){
   $('.search-button').on('click', function(e){
     e.preventDefault()
-    const gear = []
 
-    $('.search-box').each(function(){
+
+    let i = 0;
+
+    $('.search-box').each(function($inputObj){
       let item = $(this).val()
+      let search = new SearchObject(buildRequestUrl(item), i, item)
+      console.log(`i in getsearchterms each function: ${i}`)
+
+      console.log(item)
+      //search.url = buildRequestUrl(item)
+      //search.id = index
+      //search.term = item
+
       gear.push(item)
       console.log(`gear is ${gear}`)
+      getData(search)
+      i++
     })
-    buildRequestUrl(gear)
+    //buildRequestUrl(gear)
+
   })
 
 }
@@ -2123,6 +2300,7 @@ function createSearch(numTerms) {
   let id = "id"
   for (let i=1; i<=numTerms; ++i) {
     $('.input-container-flex').prepend(`<div class="inner-input-flex"><input class="search-box" type="text" required placeholder="Enter equipment model name"><div>`)
+    $('.results-container-flex').append(`<div class="searchResults"></div>`)
     console.log(`i is ${i}`)
   }
   handleConditionClick()

@@ -17,6 +17,12 @@ body {
   font-weight: 300;
   line-height: 1;
   padding: 5px;
+  position:relative;
+  max-height: 100vh;
+}
+
+.step-3 {
+  max-height: 100vh;
 }
 
 header {
@@ -36,7 +42,7 @@ header {
 
 .instruction-3 {
   position: relative;
-  top: 25vh;
+  top: 5vh;
   width: 80vw;
   margin: 0 auto;
   font-size: .8rem;
@@ -83,11 +89,6 @@ header {
   margin-bottom: 10px;
 }
 
-.calc-button {
-  width: 70vw;
-  height: 5vh;
-  border-radius: 5px;
-}
 
 .search-button {
   width: 90vw;
@@ -98,9 +99,13 @@ header {
 .calc-button {
   display: block;
   margin: 0 auto;
-  top: 30vh;
   position: relative;
+  width: 70vw;
+  height: 5vh;
+  top: 8vh;
+  border-radius: 5px;
 }
+
 
 .card-container {
   position: relative;
@@ -173,10 +178,25 @@ img {
 .results-container-flex {
   position: relative;
   display: flex;
+  flex-direction:column;
+  justify-content: space-evenly;
+  overflow-x: hidden;
+  overflow-y: auto;
+  top: 10vh;
+  max-height: 75vh;
+  padding: 10px;
+}
+
+.searchResults {
+  display: flex;
   overflow-x: auto;
-  overflow-y: hidden;
-  top: 32vh;
+  min-width: 100%;
+  margin-bottom: 20px;
+  border: 3px solid white;
+  border-radius: 10px;
   min-height: 50vh;
+  top: 20vh;
+  position: relative;
 }
 
 p {
@@ -243,6 +263,7 @@ li {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.97);
 
 }
+
 
 .total-trade-prices-grid {
   display: grid;
