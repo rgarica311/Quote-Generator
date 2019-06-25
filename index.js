@@ -247,7 +247,7 @@ function handleCardClick() {
     if ($(this).hasClass('card-rotate') === true) {
       gear[divIndex].prices.splice(priceIndex, 1)
     } else {
-        gear[divIndex].splice(idIndex, 1, parseInt(clickedPrice))
+        gear[divIndex].prices.splice(idIndex, 1, parseInt(clickedPrice))
     }
   })
   $('.calc-button').on('click', function(){
