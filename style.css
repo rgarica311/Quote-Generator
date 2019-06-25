@@ -28,7 +28,6 @@ body {
 header {
   position: relative;
   display: flex;
-  justify-content: flex-end;
 }
 
 .instruction {
@@ -103,6 +102,16 @@ header {
   width: 70vw;
   height: 5vh;
   top: 8vh;
+  border-radius: 5px;
+}
+
+.restart-button {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  width: 70vw;
+  height: 5vh;
+  top: 10vh;
   border-radius: 5px;
 }
 
@@ -225,33 +234,46 @@ li:hover {
   flex-direction: row;
 }
 
-.total-view-flex, .item-view-flex {
+.total-view-flex  {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   height: 85%;
 }
 
+.item-view-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  overflow-y: auto;
+  height: 95vh;
+  padding-bottom: 50px;
+  padding-top: 330px;
+}
+
+.item-view-title {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
 .nav-ul-flex {
   display: flex;
-  justify-content: space-evenly;
-  position: relative;
-  height: 100%;
+
   width: 60vw;
-  top: -3vh;
-  right: 5vw;
+
   font-size: .9rem;
 }
 
 li {
   display: block;
+  margin-left: 10px;
 }
 
 .price {
   grid-row-start: 3;
 }
 
-.total-buy-prices-grid {
+.prices-grid  {
   position: relative;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -262,17 +284,6 @@ li {
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.97);
 
-}
-
-
-.total-trade-prices-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  background-color: white;
-  padding: 10px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.97);
 }
 
 .conditions {
