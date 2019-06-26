@@ -24,6 +24,11 @@ html, body {
   overflow: hidden;
 }
 
+h3 {
+  position: absolute;
+  right: 0;
+}
+
 
 .step-3 {
   max-height: 100vh;
