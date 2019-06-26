@@ -264,15 +264,14 @@ li:hover {
 }
 
 
-.total-view  {
+.total-view-flex  {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   height: 85%;
 }
 
-.item-view-flex {
-
+.item-view {
   overflow-y: auto;
   height: 95vh;
   padding-bottom: 50px;
