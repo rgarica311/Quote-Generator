@@ -4,7 +4,7 @@ let processDataCalledTimes = 0;
 function processData(result, id) {
   let x = 0
 
-  let searchResultsElements = $('.results-container-flex').children()
+  let searchResultsElements = $('.results-container').children()
 
     processDataCalledTimes++
     let items = result.findCompletedItemsResponse[0].searchResult[0].item || []
@@ -65,6 +65,7 @@ function processData(result, id) {
     }
 
     if (processDataCalledTimes === parseInt(selectedNum)) {
+
       getPrices()
     }
 }
@@ -230,7 +231,7 @@ function showPrices() {
 function handleCardClick() {
   let i = 0;
 
-  $('.results-container-flex').on('click', '.card', function(e){
+  $('.results-container').on('click', '.card', function(e){
     i++
     e.stopPropagation()
     $(this).toggleClass('card-rotate')
@@ -270,7 +271,7 @@ function getPrices() {
   toggleDisplay('.step-3')
 
   const prices = []
-  let searchResultsElements = $('.results-container-flex').children()
+  let searchResultsElements = $('.results-container').children()
 
 for(i=0; i<searchResultsElements.length; i++){
   const pricesPerItem = []
@@ -293,12 +294,12 @@ let getDataCounter = 0;
 async function getData(searchObj) {
   let response = await fetchJsonp(searchObj.url)
   let data = await response.json()
+
   processData(data, searchObj.id)
 }
 
 function buildRequestUrl(item) {
-    toggleDisplay('.step-2')
-    toggleDisplay('.step-3')
+
     baseURL = "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&SERVICE-VERSION=1.7.0&SECURITY-APPNAME=RoryGarc-priceGen-PRD-55d8a3c47-c767674d&GLOBAL-ID=EBAY-US&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=";
     endURL = "&itemFilter(0).name=Condition&itemFilter(0).value=3000&itemFilter(1).name=SoldItemsOnly&itemFilter(1).value=true&paginationInput.entriesPerPage=10&paginationInput.pageNumber=1";
     let requestUrl = baseURL.concat(item.split(' ').join('+'), endURL);
@@ -308,7 +309,10 @@ function buildRequestUrl(item) {
 const gear = []
 const gearName = []
 
-function getSearchTerms(numTerms){
+function getSearchTerms(){
+  console.log('get search terms running')
+
+
   $('.search-button').on('click', function(e){
     e.preventDefault()
 
@@ -324,7 +328,6 @@ function getSearchTerms(numTerms){
       i++
     })
   })
-
 }
 
 function createSearch(numTerms) {
@@ -333,13 +336,14 @@ function createSearch(numTerms) {
   let id = "id"
   for (let i=0; i<numTerms; ++i) {
     $('.input-container-flex').prepend(`<div class="inner-input-flex"><input class="search-box" type="text" required placeholder="Enter equipment model name"><div>`)
-    $('.results-container-flex').append(`<div class="searchResults" id="result${i}"></div>`)
+    $('.results-container').append(`<div class="searchResults" id="result${i}"></div>`)
   }
 
   getSearchTerms()
 }
 
 function toggleDisplay(className) {
+  console.log('toggle running')
   if ($(className).attr('style') === 'display: none') {
     $(className).removeAttr('style')
   } else {
@@ -359,6 +363,10 @@ function startQuote() {
 function handleRestart() {
   console.log('handlerestart running')
   $('.restart-button').on('click', function(){
+      location.reload()
+  })
+
+  $('.restart-2').on('click', function(){
       location.reload()
   })
 }
