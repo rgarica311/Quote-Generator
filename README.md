@@ -19,5 +19,7 @@ again. Once you are satisfied with the results you click calculate to see the pr
 Step 4: When viewing the quote results you can look at it in a total view and a per item view. Both views are seperated into buy and trade prices depending on the quality of the item being purchased. Typically camera
 stores offer more money for if the customer wants to trade in their equipment against buying something from the store versus simplying selling outright for cash. 
 
+## Requirements 
 
+Make sure any browser extensions such as adblock, ublock, disconnect, are disabled. 
 
