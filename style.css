@@ -39,6 +39,16 @@ header {
   display: flex;
 }
 
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
 .instruction {
   position: relative;
   top: 40vh;
@@ -76,6 +86,7 @@ header {
   flex-direction: row;
   flex-wrap: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
   height: auto;
 }
 
@@ -182,6 +193,10 @@ header {
 
 }
 
+.inner-input{
+  display: inline-block;
+}
+
 img {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -248,10 +263,6 @@ li:hover {
   cursor: pointer;
 }
 
-.inner-input-flex {
-  display: flex;
-  flex-direction: row;
-}
 
 .total-view-flex  {
   display: flex;

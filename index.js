@@ -335,7 +335,7 @@ function createSearch(numTerms) {
   toggleDisplay('.step-2')
   let id = "id"
   for (let i=0; i<numTerms; ++i) {
-    $('.input-container-flex').prepend(`<div class="inner-input-flex"><input class="search-box" type="text" required placeholder="Enter equipment model name"><div>`)
+    $('.input-container-flex').prepend(`<div class="inner-input"><input class="search-box" type="text" required placeholder="Enter equipment model name"></div>`)
     $('.results-container').append(`<div class="searchResults" id="result${i}"></div>`)
   }
 
