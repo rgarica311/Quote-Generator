@@ -202,8 +202,8 @@ function showPrices() {
   $('.total-trade-prices-grid').append(`<span class="conditions">Pre-owned Mint</span><span class="conditions">Used Light Wear</span><span class="conditions">Used Medium Wear</span><span class="conditions">Used Heavy Wear</span><span class="conditions">Used Semi-functional</span><span class="price">${gear[0].getTotalPrice('pom', 'trd')}</span><span class="price">${gear[0].getTotalPrice('ulw','trd')}</span><span class="price">${gear[0].getTotalPrice('umw', 'trd')}</span><span class="price">${gear[0].getTotalPrice('uhw','trd')}</span><span class="price">${gear[0].getTotalPrice('usf','trd')}</span>`)
 
   for (i=0; i<selectedNum; i++) {
-    $('.item-view-flex').append(`<h2 class="item-view-title">${gear[i].name} Buy Prices</h2><div class="item-buy-prices-grid prices-grid"><span class="conditions">Pre-owned Mint</span><span class="conditions">Used Light Wear</span><span class="conditions">Used Medium Wear</span><span class="conditions">Used Heavy Wear</span><span class="conditions">Used Semi-functional</span><span class="price">${gear[i].getBuyPrice("pom")}</span><span class="price">${gear[i].getBuyPrice("ulw")}</span><span class="price">${gear[i].getBuyPrice("umw")}</span><span class="price">${gear[i].getBuyPrice("uhw")}</span><span class="price">${gear[i].getBuyPrice("usf")}</span></div>`)
-    $('.item-view-flex').append(`<h2 class="item-view-title">${gear[i].name} Trade Prices</h2><div class="item-trade-prices-gird prices-grid"><span class="conditions">Pre-owned Mint</span><span class="conditions">Used Light Wear</span><span class="conditions">Used Medium Wear</span><span class="conditions">Used Heavy Wear</span><span class="conditions">Used Semi-functional</span><span class="price">${gear[i].getTrdPrice("pom")}</span><span class="price">${gear[i].getTrdPrice("ulw")}</span><span class="price">${gear[i].getTrdPrice("umw")}</span><span class="price">${gear[i].getTrdPrice("uhw")}</span><span class="price">${gear[i].getTrdPrice("usf")}</span></div>`)
+    $('.item-view').append(`<h2 class="item-view-title">${gear[i].name} Buy Prices</h2><div class="item-buy-prices-grid prices-grid"><span class="conditions">Pre-owned Mint</span><span class="conditions">Used Light Wear</span><span class="conditions">Used Medium Wear</span><span class="conditions">Used Heavy Wear</span><span class="conditions">Used Semi-functional</span><span class="price">${gear[i].getBuyPrice("pom")}</span><span class="price">${gear[i].getBuyPrice("ulw")}</span><span class="price">${gear[i].getBuyPrice("umw")}</span><span class="price">${gear[i].getBuyPrice("uhw")}</span><span class="price">${gear[i].getBuyPrice("usf")}</span></div>`)
+    $('.item-view').append(`<h2 class="item-view-title">${gear[i].name} Trade Prices</h2><div class="item-trade-prices-gird prices-grid"><span class="conditions">Pre-owned Mint</span><span class="conditions">Used Light Wear</span><span class="conditions">Used Medium Wear</span><span class="conditions">Used Heavy Wear</span><span class="conditions">Used Semi-functional</span><span class="price">${gear[i].getTrdPrice("pom")}</span><span class="price">${gear[i].getTrdPrice("ulw")}</span><span class="price">${gear[i].getTrdPrice("umw")}</span><span class="price">${gear[i].getTrdPrice("uhw")}</span><span class="price">${gear[i].getTrdPrice("usf")}</span></div>`)
   }
 
   $('.restart').on('click', function(e){
@@ -214,16 +214,16 @@ function showPrices() {
   $('.total').on('click', function(e){
     e.stopPropagation()
     if ( $('.total-view-flex').attr('style') === 'display: none' ) {
-      toggleDisplay('.item-view-flex')
+      toggleDisplay('.item-view')
       toggleDisplay('.total-view-flex')
     }
   })
 
   $('.item').on('click', function(e){
     e.stopPropagation()
-    if ( $('.item-view-flex').attr('style') === 'display: none' ) {
+    if ( $('.item-view').attr('style') === 'display: none' ) {
       toggleDisplay('.total-view-flex')
-      toggleDisplay('.item-view-flex')
+      toggleDisplay('.item-view')
     }
   })
 }
