@@ -1,7 +1,12 @@
 var selectedNum;
 let processDataCalledTimes = 0;
 
+
+
 function processData(result, id) {
+
+
+
   let x = 0
 
   let searchResultsElements = $('.results-container').children()
@@ -18,36 +23,15 @@ function processData(result, id) {
             if (itemName.includes(pass1) || itemName.includes(pass2) || itemName.includes(pass3) || itemName.includes(pass4) || itemName.includes(pass5) || itemName.includes(pass6) || itemName.includes(pass7) ) {
               searchResultsElements.each(function(item, index){
                   if(index == id) {
+
                     let htmlString = `&lt;div class="card-container" ontouchstart="this.classList.toggle('hover');"&gt;
-                      &lt;div id="card${x}" class="card"&gt;
-                        &lt;div class="card-front"&gt;
-                          &lt;img class="pic" alt="item picture" src="${pic}" style="width:100%"&gt;
-                          &lt;div class="container"&gt;
-                            &lt;span&gt;${itemName}&lt;br&gt;&lt;/span&gt;
-                            &lt;p&gt;&lt;br&gt;Sold Price:&lt;span class="price"&gt;${soldPrice}&lt;/span>&lt;/p&gt;
-                          &lt;/div&gt;
-                        &lt;/div&gt;
-                        &lt;div class="card-back"&gt;
-                          &lt;div class="back-message"&gt;Item excluded from calculaton. Click again to include in final calculation.&lt;/div&gt;
-                        &lt;/div&gt;
-                      &lt;/div&gt;
-                    &lt;/div&gt;`
-                    htmlString = $('<div />').html(htmlString).text()
-                    $(item).append(htmlString)
-                  }
-              })
-              x++
-            }
-          } else {
-              searchResultsElements.each(function(index, item){
-                if(index == id) {
-                  let htmlString = `&lt;div class="card-container" ontouchstart="this.classList.toggle('hover');"&gt;
                     &lt;div id="card${x}" class="card"&gt;
                       &lt;div class="card-front"&gt;
-                        &lt;img class="pic" alt="item picture" src="${pic}" style="width:100%"&gt;
+                        &lt;div class="img-container" id="js-bg-img-${x}"&gt;
+                        &lt/div&gt;
                         &lt;div class="container"&gt;
-                          &lt;span&gt;${itemName}&lt;br&gt;&lt;/span&gt;
-                          &lt;p&gt;&lt;br&gt;Sold Price:&lt;span class="price"&gt;${soldPrice}&lt;/span>&lt;/p&gt;
+                          &lt;span&gt;${itemName}&lt;/span&gt;
+                          &lt;p&gt;Sold Price:&lt;span class="price"&gt;${soldPrice}&lt;/span>&lt;/p&gt;
                         &lt;/div&gt;
                       &lt;/div&gt;
                       &lt;div class="card-back"&gt;
@@ -57,6 +41,38 @@ function processData(result, id) {
                   &lt;/div&gt;`
                   htmlString = $('<div />').html(htmlString).text()
                   $(item).append(htmlString)
+                  $(`#js-bg-img-${x}`).css('background-image', `url(${pic})`)
+                    &lt;/div&gt;`*/
+
+                  }
+              })
+              x++
+            }
+          } else {
+              searchResultsElements.each(function(index, item){
+                if(index == id) {
+
+                  let htmlString = `&lt;div class="card-container" ontouchstart="this.classList.toggle('hover');"&gt;
+                  &lt;div id="card${x}" class="card"&gt;
+                    &lt;div class="card-front"&gt;
+                      &lt;div class="img-container" id="js-bg-img-${x}"&gt;
+                      &lt/div&gt;
+                      &lt;div class="container"&gt;
+                        &lt;span&gt;${itemName}&lt;/span&gt;
+                        &lt;p&gt;Sold Price:&lt;span class="price"&gt;${soldPrice}&lt;/span>&lt;/p&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="card-back"&gt;
+                      &lt;div class="back-message"&gt;Item excluded from calculaton. Click again to include in final calculation.&lt;/div&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;`
+                htmlString = $('<div />').html(htmlString).text()
+                $(item).append(htmlString)
+                $(`#js-bg-img-${x}`).css('background-image', `url(${pic})`)
+
+
+
                 }
               })
               x++
