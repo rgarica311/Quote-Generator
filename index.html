@@ -3,30 +3,33 @@
 <html>
 <head>
   <link rel="stylesheet" content="text/css" href="style.css">
+  <link rel="shortcut icon" href="favicon.ico">
+
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>USED GEAR PRICE GENERATOR</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.1.3/fetch-jsonp.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="index.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
-
+  <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Raleway&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Gochi+Hand&display=swap" rel="stylesheet">
 </head>
 <body>
+  <header>
+    <h3 class="logo">Quote Gen</h3>
+    <div class="view-buttons hide">
+      <button class="nav-item total">TOTAL VIEW</button>
+      <button class="nav-item item">ITEM VIEW</button>
+    </div>
+  </header>
 
-<header>
-  <nav class="views" style="display: none">
-    <ul class="nav-ul-flex">
-      <li class="nav-item restart">Restart</li>
-      <li class="nav-item total">Total View</li>
-      <li class="nav-item item">Item View</li>
-    </ul>
-  </nav>
-  <h3 class="logo">Quote Gen</h3>
-</header>
+
+
 
 <section class="step-1" style="display: block">
-
+<div class="bg-img-container"></div>
 <div class="instruction">How many items do you want to quote?</div>
 
 <div class="scroll-container-flex">
@@ -36,64 +39,61 @@
    <div id="4" class="num-opt">4</div>
    <div id="5" class="num-opt">5</div>
    <div id="6" class="num-opt">6</div>
-   <div id="7" class="num-opt">7</div>
 </div>
 
 </section>
 
 <section class="step-2" style="display: none">
+  <div class="bg-img-container"></div>
+
   <div class="instruction-2">Search for photo equipment.</div>
 
   <div class="input-container-flex">
 
+
+
+
+  </div>
+  <div class="srch-restart-buttons">
     <button type="button" class="search-button">Search</button>
     <button type="button" class="restart-2">Restart</button>
-
-
   </div>
 
 </section>
 
 <section class="step-3" style="display: none">
-  <div class="instruction-3">Click on a card to exclude its price from your final calculation.</div>
 
-  <button type="button" class="calc-button">Calculate</button>
-  <button type="button" class="restart-button">Restart</button>
+  <div class="results-container" id="resultsContainer">
 
+    <div class="item-header-tabs">
 
+    </div>
 
-  <div class="results-container">
+    <div class="GET-QUOTE">
 
+      <div class="total-view-flex hide">
+
+        <div class="grid-container">
+          <div class="quote-label">Total Buy Prices</div>
+          <div class="total-buy-prices-grid prices-grid">
+          </div>
+        </div>
+
+      <div class="grid-container">
+        <div class="quote-label">Total Trade Prices</div>
+        <div class="total-trade-prices-grid prices-grid">
+        </div>
+      </div>
+
+    </div>
+
+      <div class="item-view hide">
+      </div>
+    </div>
 
   </div>
 
 </section>
-
-
-<section class="step-4" style="display: none">
-
-
-  <div class="total-view-flex" style="display: none">
-    <h2>Total Buy Prices</h2>
-    <div class="total-buy-prices-grid prices-grid">
-    </div>
-    <h2>Total Trade Prices</h2>
-    <div class="total-trade-prices-grid prices-grid">
-    </div>
-
-  </div>
-
-  <div class="item-view" style="display: none">
-
-
-
-  </div>
-
-
-</section>
-
-
-
 
 </body>
 </html>
