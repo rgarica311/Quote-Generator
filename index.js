@@ -1,17 +1,15 @@
 var selectedNum;
 let processDataCalledTimes = 0;
 
+function processData(result, id) {
 
-
-function processData(result, id, term) {
-
-
+  console.log('processData running')
 
   let x = 0
 
   let searchResultsElements = $('.results-container').children().not('.item-header-tabs, .total-view-flex, .item-view, .GET-QUOTE')
 
-  console.log('search results elements',  searchResultsElements)
+  console.log('search results elements contains',  searchResultsElements)
 
     processDataCalledTimes++
     let items = result.findCompletedItemsResponse[0].searchResult[0].item || []
@@ -19,12 +17,12 @@ function processData(result, id, term) {
         let item = items[j], title = item.title, pic = item.galleryURL, viewitem = item.viewItemURL, soldPrice = Math.round(item.sellingStatus[0].convertedCurrentPrice[0]["__value__"]), itemName = title.toString()
         let test1 = "with", test2 = "With", test3 = "WITH", test4 = "W/", test6 = "EXTREME", test5 = "w/"
         let pass1 = "box", pass2 = "case", pass3 = "Box", pass4 = "Case", pass5 = "BOX", pass6 = "SHUTTER", pass7= "Shutter"
-        console.log(`term ${term} pic ${pic}`)
+        //console.log(`term ${term} pic ${pic}`)
 
         if (null != title && null != viewitem && soldPrice != null) {
           if (itemName.includes(test1) || itemName.includes(test2) || itemName.includes(test3) || itemName.includes(test4) || itemName.includes(test5)) {
             if (itemName.includes(pass1) || itemName.includes(pass2) || itemName.includes(pass3) || itemName.includes(pass4) || itemName.includes(pass5) || itemName.includes(pass6) || itemName.includes(pass7) ) {
-              searchResultsElements.each(function(item, index){
+              searchResultsElements.each(function(index, item){
                   if(index == id) {
                     console.log('test and pass found')
                     let htmlString = `&lt;div class="card-container" ontouchstart="this.classList.toggle('hover');"&gt;
@@ -55,9 +53,8 @@ function processData(result, id, term) {
               searchResultsElements.each(function(index, item){
                 if(index == id) {
 
-                  let gearTerm = term
+                  console.log(`searchResultsElements each function: index is ${index}, id is ${id}, item is ${item}`)
 
-                  gearTerm = gearTerm.replace(/\s+/g, '-')
 
                   let htmlString = `&lt;div class="card-container" ontouchstart="this.classList.toggle('hover');"&gt;
                     &lt;div id="card${x}" class="card"&gt;
@@ -76,7 +73,7 @@ function processData(result, id, term) {
                     &lt;/div&gt;`
                   htmlString = $('<div />').html(htmlString).text()
                   $(item).append(htmlString)
-                  console.log(`term2 ${term} pic2 ${pic}`)
+                  //console.log(`term2 ${term} pic2 ${pic}`)
                   $(`#js-bg-img-${index}-${x}`).css('background-image', `url(${pic})`)
 
                 }
@@ -87,7 +84,7 @@ function processData(result, id, term) {
     }
 
     if (processDataCalledTimes === parseInt(selectedNum)) {
-
+      createEquipObjects()
       handleVerticalTabs()
       getPrices()
 
@@ -120,7 +117,7 @@ function handleVerticalTabs() {
   $('.searchResults').css('display', 'none')
   $('.GET-QUOTE').css('display', 'none')
 
-    console.log('running handle click')
+    //console.log('running handle click')
     $('.item-header-tabs').on('click', 'button', function(e){
 
       e.stopPropagation()
@@ -139,15 +136,15 @@ function handleVerticalTabs() {
 
       text = '.' + text
 
-      console.log('text', text)
+      //console.log('text', text)
       if (text != '.GET-QUOTE') {
-        console.log('text is not get-quote text is', text)
+        //console.log('text is not get-quote text is', text)
         $(text).css('display', 'flex')
         if ($('.view-buttons').hasClass('hide') != true) {
           $('.view-buttons').addClass('hide')
         }
       } else {
-        console.log('run else')
+        //console.log('run else')
         $(text).css('display', 'block')
       }
 
@@ -156,10 +153,11 @@ function handleVerticalTabs() {
 }
 
 function createEquipObjects() {
+  console.log('create equip objects running')
   for(i=0; i<gear.length; i++){
     gear[i] = new EquipObject
     gear[i].name = gearName[i]
-    console.log(`gear[${i}.name] is ${gear[i].name}`)
+    console.log(`gear[${i}].name in createEquipObjects is ${gear[i].name}`)
   }
 
 }
@@ -173,7 +171,7 @@ function EquipObject(name, prices) {
 }
 
 function calculateAvg(obj) {
-  console.log('obj in calc average', obj)
+  //console.log('obj in calc average', obj)
   const reducer = (accumulator, currentValue) => accumulator + currentValue
   let sum = obj.prices.reduce(reducer)
   let avg = sum / obj.prices.length
@@ -416,7 +414,7 @@ function getPrices() {
 
   const prices = []
   let searchResultsElements = $('.results-container').children().not('.item-header-tabs, .total-view-flex, .item-view, .GET-QUOTE')
-  console.log('searchResultsElements', searchResultsElements)
+  //console.log('searchResultsElements', searchResultsElements)
 
 for(i=0; i<searchResultsElements.length; i++){
   const pricesPerItem = []
@@ -428,60 +426,140 @@ for(i=0; i<searchResultsElements.length; i++){
 
 
   gear[i].prices = pricesPerItem
-  console.log('gear[i].prices', gear[i].prices)
+  //console.log('gear[i].prices', gear[i].prices)
 }
   handleCardClick()
 
 }
 
 let getDataCounter = 0;
+const resultsArray = []
+let rejects = []
+const acceptedCatIDs = ["30093", "31388", "3323", "15230", "162480", "83857", "29994", "43440", "64345", "50506", "167930", "179697", "170066", "29965", "43479", "64353", "30078", "30090"]
+let verifyDataCounter = 0;
+let catIDs
+let responses
+let isSuperset
+let searchIDs
 
-async function getData(searchObj) {
+async function verifyData(searchObj) {
+
+
   let response = await fetchJsonp(searchObj.url)
   let data = await response.json()
+  responses.push(data)
+  searchIDs.push(searchObj.id)
+  let items = data.findCompletedItemsResponse[0].searchResult[0].item || []
+  console.log(`items is: ${items}`)
+  let item = items[0]
+  console.log(`item is: ${item}`)
+  let categoryID = item.primaryCategory[0].categoryId[0]
+  console.log(`categoryID is: ${categoryID}`)
+  catIDs.push(categoryID)
+  console.log(`catIDS is: ${catIDs}`)
+  verifyDataCounter++
+  console.log(`verifyDataCounter before if: ${verifyDataCounter}`)
 
-  processData(data, searchObj.id, searchObj.term)
+  if(verifyDataCounter == selectedNum) {
+
+    console.log(`verifydatacounter: ${verifyDataCounter}, selectedNum: ${selectedNum}`)
+    isSuperset = catIDs.every(function (val) {
+      console.log(`isSupserset: ${isSuperset}`)
+
+      return acceptedCatIDs.indexOf(val) >= 0;
+    });
+
+    if(isSuperset == true) {
+
+      console.log(`catIDs all good gearName ${gearName}`)
+      for(let x=0; x<gearName.length; x++){
+        console.log(`gearName is: ${gearName}`)
+        console.log(`gearName length is: ${gearName.length}`)
+        console.log(`x is ${x}`)
+
+        console.log(`gearName${[x]} is: ${gearName[x]}`)
+
+        let term = gearName[x]
+        console.log(`term is ${term}`)
+        term = term.replace(/\s+/g, '-')
+        term = term.replace(/\./g, '-')
+        console.log(`term after replace: ${term}`)
+
+        $('.item-header-tabs').append(`<button class="tab-item">${gearName[x].toUpperCase()}</button>`)
+        $('#resultsContainer').append(`<div class="searchResults ${term.toUpperCase()}" id="result${x}"></div>`)
+      }
+
+      $('.item-header-tabs').append('<button type="button" class="tab-item calc-button">GET QUOTE</button>')
+      $('.item-header-tabs').append('<button type="button" class="restart-button">RESTART</button>')
+
+
+      for(i=0; i<responses.length; i++){
+        console.log(`responses is: ${responses}, response${i} is: ${responses[i]}`)
+        processData(responses[i], searchIDs[i])
+      }
+
+    } else {
+        alert('You can only search for photographic equipment')
+    }
+
+  } else {
+      console.log(`verifyDataCounter in else: ${verifyDataCounter}`)
+  }
+
 }
 
-function buildRequestUrl(item) {
 
-    baseURL = "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&SERVICE-VERSION=1.7.0&SECURITY-APPNAME=RoryGarc-priceGen-PRD-55d8a3c47-c767674d&GLOBAL-ID=EBAY-US&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=";
-    endURL = "&itemFilter(0).name=Condition&itemFilter(0).value=3000&itemFilter(1).name=SoldItemsOnly&itemFilter(1).value=true&paginationInput.entriesPerPage=8&paginationInput.pageNumber=1";
-    let requestUrl = baseURL.concat(item.split(' ').join('+'), endURL);
-    return requestUrl
-}
-
-const gear = []
-const gearName = []
+let gear
+let gearName
 
 function getSearchTerms(){
-  console.log('get search terms running')
+  //onsole.log('get search terms running')
 
   $('.search-button').on('click', function(e){
     e.preventDefault()
     let i = 0;
+    verifyDataCounter = 0
+    $('.item-header-tabs').empty()
+    gear = []
+    gearName = []
+    catIDs = []
+    responses = []
+    searchIDs = []
+    console.log(`getSearchTersm running lists should be empty:
+      gear:${gear},
+      gearName:${gearName},
+      catIDs:${catIDs},
+      responses:${responses}`)
+
     $('.search-box').each(function($inputObj){
+
       let item = $(this).val()
+      console.log(`item: ${item}`)
       let search = new SearchObject(buildRequestUrl(item), i, item)
       gear.push(item)
-      console.log('gear in getsearchterms', gear)
+      console.log('gear in getSearchTerms:', gear)
       gearName.push(item)
-      let term = gearName[i]
-      term = term.replace(/\s+/g, '-')
-      term = term.replace(/\./g, '-')
+      console.log('gearName in getSearchTerms:', gearName)
 
-      $('.item-header-tabs').append(`<button class="tab-item">${gear[i].toUpperCase()}</button>`)
-      $('#resultsContainer').append(`<div class="searchResults ${term.toUpperCase()}" id="result${i}"></div>`)
-      createEquipObjects()
-      getData(search)
+      //console.log('gear[i] above where its not a function', gear[i])
+
+      verifyData(search)
       i++
     })
-    $('.item-header-tabs').append('<button type="button" class="tab-item calc-button">GET QUOTE</button>')
-    $('.item-header-tabs').append('<button type="button" class="restart-button">RESTART</button>')
+
   })
 
 
  }
+
+ function buildRequestUrl(item) {
+
+     baseURL = "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&SERVICE-VERSION=1.7.0&SECURITY-APPNAME=RoryGarc-priceGen-PRD-55d8a3c47-c767674d&GLOBAL-ID=EBAY-US&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=";
+     endURL = "&itemFilter(0).name=Condition&itemFilter(0).value=3000&itemFilter(1).name=SoldItemsOnly&itemFilter(1).value=true&paginationInput.entriesPerPage=8&paginationInput.pageNumber=1";
+     let requestUrl = baseURL.concat(item.split(' ').join('+'), endURL);
+     return requestUrl
+ }
+
 
 function createInputs(numTerms) {
   toggleDisplay('.step-1')
@@ -499,7 +577,7 @@ function createInputs(numTerms) {
 }
 
 function toggleDisplay(className) {
-  console.log('toggle running')
+  //console.log('toggle running')
   if ($(className).attr('style') === 'display: none') {
     $(className).removeAttr('style')
   } else {
@@ -518,9 +596,5 @@ function startQuote() {
     createInputs(selectedNum)
   })
 }
-
-
-
-
 
 $(startQuote);
