@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <link rel="stylesheet" content="text/css" href="style.css">
   <link rel="shortcut icon" href="favicon.ico">
@@ -12,20 +12,21 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="index.js"></script>
-  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
-  <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Raleway&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Gochi+Hand&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Montserrat:400,700|Raleway:400,700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
 <body>
   <header>
-    <h3 class="logo">Quote Gen</h3>
-    <div class="view-buttons hide">
-      <button class="nav-item total">TOTAL VIEW</button>
-      <button class="nav-item item">ITEM VIEW</button>
-    </div>
+    <div class="logo">Quote Gen</div>
   </header>
 
-
+  <div class="view-buttons">
+    <button class="nav-item total hide">Total View</button>
+    <button class="nav-item item hide">Item View</button>
+    <button class="nav-item open-directions"><a href="#ex1" rel="modal:open">Directions</a></button>
+  </div>
 
 
 <section class="step-1" style="display: block">
@@ -46,18 +47,18 @@
 <section class="step-2" style="display: none">
   <div class="bg-img-container"></div>
 
-  <div class="instruction-2">Search for photo equipment.</div>
+
 
   <div class="input-container-flex">
+    <div class="instruction-2">Search for photo equipment.</div>
 
-
-
+    <div class="srch-restart-buttons">
+      <button type="button" class="search-button">Search</button>
+      <button type="button" class="restart-2">Restart</button>
+    </div>
 
   </div>
-  <div class="srch-restart-buttons">
-    <button type="button" class="search-button">Search</button>
-    <button type="button" class="restart-2">Restart</button>
-  </div>
+
 
 </section>
 
@@ -74,13 +75,13 @@
       <div class="total-view-flex hide">
 
         <div class="grid-container">
-          <div class="quote-label">Total Buy Prices</div>
+          <div class="quote-label">Buy Prices</div>
           <div class="total-buy-prices-grid prices-grid">
           </div>
         </div>
 
       <div class="grid-container">
-        <div class="quote-label">Total Trade Prices</div>
+        <div class="quote-label">Trade Prices</div>
         <div class="total-trade-prices-grid prices-grid">
         </div>
       </div>
@@ -94,6 +95,56 @@
   </div>
 
 </section>
+
+<!-- Modal HTML embedded directly into document -->
+<div id="ex1" class="modal">
+  <h1>QuoteGen</h1>
+  <p class="directions">Many camera stores deal in second hand photographic
+    equipment. The purpose of this application is to make
+    it easy for employees of camera stores to quickly offer
+    quotes to customers for the equipment they wish to
+    sell or trade.</p>
+
+    <p class="directions">The application allows the user to quote from 1 to 7
+    pieces of equipment at once. It uses the eBay api to
+    search for sold listings and calculate a value based
+    on the average sold price of completed listings.</p>
+
+  <h2>Instructions</h2>
+    <span class="bold-span">Step 1:</span>
+    <p class="directions">Choose the number of pieces you wish to look up.</p>
+
+    <span class="bold-span">Step 2:</span>
+    <p class="directions">Enter once piece of camera equipment per input box.
+    Examples: Canon 5D Mark III, Sony a7s II.</p>
+
+    <span class="bold-span">Step 3:</span>
+    <p class="directions">The results are displayed as cards with a picture of
+    the item, description and sold price. The user is meant
+    to sift through these results and make sure they represent
+    what they are lookng for. If there is any item that doesn't
+    quite fit what the user is looking for they can click on
+    that card.</p>
+
+    <p class="directions">It will flip around and the associated price would not be
+    inlcuded in the calculation. To re-add the item simply click
+    the card again. Once you are satisfied with the results
+    you click calculate to see the prices you should offer.</p>
+
+    <span class="bold-span">Step 4:</span>
+    <p class="directions">When viewing the quote results you can look at it in a total
+    view and a per item view. Both views are seperated into buy
+    and trade prices depending on the quality of the item being purchased.</p>
+
+    <p class="directions">Typically camera stores offer more money for if the customer wants
+    to trade in their equipment against something from the store versus
+    simplying selling outright for cash.</p>
+
+  <h2>Requirements</h2>
+  <p class="directions">Make sure any browser extensions such as adblock, ublock, disconnect, are disabled.</p>
+</div>
+
+
 
 </body>
 </html>

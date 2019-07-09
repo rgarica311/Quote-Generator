@@ -9,7 +9,7 @@
 
 body {
   font-family: 'Lato', sans-serif;
-  background-color: #ccddee;
+  background: radial-gradient(circle, rgba(204,221,238,1) 0%, rgba(116,152,186,1) 56%, rgba(76,113,147,1) 100%);
   font-size: 100%;
   font-style: normal;
   font-weight: 300;
@@ -21,18 +21,44 @@ html, body {
   overflow: hidden;
 }
 
-h3 {
+h1, h2 {
+  margin-bottom: 10px;
+}
+
+.logo {
   color: #0B3B59;
   font-size: 2rem;
   z-index: 1;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 0;
-  left: 0;
   width: max-content;
   margin: 0 auto;
-  font-family: 'Raleway';
+  font-family: 'Raleway', sans-serif;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+span.bold-span {
+  font-weight: 700;
+  font-family: 'Raleway', san-serif;
+  margin-bottom: 5px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.directions {
+  margin-bottom: 15px;
+  text-decoration: none;
+  color: black;
+  font-family: 'Raleway', sans-serif
+}
+
+.GET-QUOTE {
+  width: 80vw;
+  left: 10vw;
 }
 
 .quote-label, .item-view-title {
@@ -43,16 +69,18 @@ h3 {
   color: black;
   background-color: white;
   height: 60px;
-  padding: 15px;
+  padding: 5px;
   border-top: 6px solid red;
   text-transform: uppercase;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.97);
+  cursor: pointer;
 }
 
 header {
   height: 50px;
-  padding: 10px;
-  /* background-color: #F2EFE9; */
+  width: max-content;
+  display: table;
+  margin: 0 auto;
 }
 
 p {
@@ -70,11 +98,7 @@ p {
     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
-.GET-QUOTE {
-  width: 75vw;
-  left: 10vw;
-  top: 10vh;
-}
+
 
 .bg-img-container {
   background-image: url('/Assets/bg-img.jpg');
@@ -89,14 +113,24 @@ p {
   min-height: 50vh;
 }
 
-.instruction, .instruction-2 {
-  top: 4vh;
+.instruction {
+  top: 6vh;
   width: 80vw;
   margin: 0 auto;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
   color: #0B3B59;
+}
+
+.instruction-2 {
+  width: 80vw;
+  margin: 0 auto;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #0B3B59;
+  margin-bottom: 10px;
 }
 
 
@@ -129,16 +163,19 @@ p {
 .num-opt:hover {
   font-size: 8rem;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .input-container-flex {
-  top: 6vh;
+  bottom: 8vh;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
   overflow-y: auto;
   width: 100%;
+  position: absolute;
+  height: 56%;
 }
 
 .search-box {
@@ -155,14 +192,12 @@ p {
 
 .srch-restart-buttons {
   text-align: center;
-  position: absolute;
-  bottom: 2vh;
+
   width: 100vw;
 }
 
 .search-button, .restart-2 {
-  width: 190px;
-  height: 50px;
+  width: 37vw;
   border-radius: 5px;
   background-color: #F2EFE9;
   font-family: 'Architects Daughter', cursive;
@@ -177,7 +212,6 @@ p {
   margin-right: 10px;
   margin-bottom: 10px;
   max-width: 300px;
-  max-height: 350px;
 }
 
 .card-rotate {
@@ -222,12 +256,13 @@ img {
   width: 85%;
   margin: 0 auto;
   top: 30%;
+  font-size: 1.5rem;
 }
 
 .container {
   background-color: #EFF1F2;
   padding: 5px;
-  height: 100px;
+  height: 120px;
   font-size: 1.2rem;
   color: black;
   font-weight: bold;
@@ -258,20 +293,19 @@ li:hover {
   flex-direction: column;
   justify-content: space-around;
   height: 85vh;
-  bottom: 10vh;
+  padding: 20px;
 }
 
 .item-view {
   overflow-y: auto;
-  bottom: 8vh;
   height: 95vh;
-  padding-bottom: 5vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
-.item-view-title {
-  /* margin-bottom: 15px; */
-  margin-top: 15px;
-}
+
 
 .nav-ul-flex {
   display: flex;
@@ -303,7 +337,7 @@ li {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.97);
   margin: 0 auto;
   grid-gap: 10px;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .conditions, .conditions-short {
@@ -327,13 +361,16 @@ li {
 }
 
 .view-buttons {
-  height: 100%;
-  text-align: center;
-  width: 25%;
-  margin: 0 auto;
-  /* background-color: #728A8C; */
+  height: 50px;
+  min-width: 35vw;
   right: 0;
+  top: 0;
   position: absolute;
+  justify-content: space-evenly;
+  display: flex;
+  font-size: 2rem;
+  align-items: center;
+
 }
 
 .view-buttons button.active {
@@ -365,9 +402,9 @@ li {
 }
 
 .nav-item {
-  width: 150px;
+  width: max-content;
   background-color: transparent;
-  height: 100%;
+  height: max-content;
   font-family: 'Architects Daughter', cursive;
   font-size: 1.5rem;
   border-style: none;
@@ -439,7 +476,7 @@ li {
 .searchResults {
   flex-wrap: wrap;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   top: 35px;
   height: 90vh;
   overflow-y: auto;
@@ -482,11 +519,56 @@ footer {
   margin-right: 10px;
 }
 
+@media screen and (min-height: 568px) {
+  .item-header-tabs, .searchResults {
+    top: 0;
+  }
+}
+
+@media screen and (min-width: 842px) {
+  .searchResults {
+    padding-left: 80px;
+  }
+}
+
+@media screen and (max-width: 815px){
+  .searchResults{
+    justify-content: center;
+  }
 
 
-@media screen and (max-width: 1024px) {
+
+  .item-header-tabs .restart-button {
+    padding: 10px;
+  }
+}
+
+@media screen and (min-height: 569px) {
+  .input-container-flex {
+    bottom: 2vh;
+  }
+}
+
+@media screen and (max-height: 568px) {
+  .input-container-flex {
+    bottom: 3vh;
+  }
+}
+
+@media screen and (min-width: 375px) {
   .bg-img-container{
-    height: 20vh;
+    height: 40vh;
+  }
+}
+
+
+@media screen and (max-width: 544px) {
+  .bg-img-container{
+    height: 35vh;
+  }
+
+  .instruction-2 {
+    font-size: 1.1rem;
   }
 }
 
@@ -498,8 +580,12 @@ footer {
     justify-content: center;
   }
 
-  .item-header-tabs{
-    max-width: 70px;
+  .item-header-tabs {
+    max-width: 80px;
+  }
+
+  .item-header-tabs button{
+    font-size: .8rem;
   }
 
   .img-container{
@@ -537,8 +623,39 @@ footer {
     font-size: 1rem;
   }
 
+  header {
+    margin-left: 10px;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .nav-item {
+    font-size: 1rem;
+  }
+
+  .view-buttons {
+    width: 80vw;
+  }
+
 }
 
+@media screen and (max-width: 450px) {
+  .view-buttons {
+    width: 60vw;
+
+  }
+
+  .view-buttons .nav-item {
+    font-size: .7rem;
+  }
+
+  .item-view, .total-view-flex {
+    padding: 5px;
+  }
+
+}
 @media screen and (max-width: 367px) {
 
   .prices-grid {
@@ -546,7 +663,6 @@ footer {
   }
 
 }
-
 
 
 @media screen and (min-width: 698px) {
@@ -565,5 +681,11 @@ footer {
 
     .conditions {
       display: none;
+    }
+  }
+
+  @media screen and (max-width: 1048px) {
+    .nav-item{
+      font-size: 1rem;
     }
   }

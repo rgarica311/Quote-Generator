@@ -140,8 +140,9 @@ function handleVerticalTabs() {
       if (text != '.GET-QUOTE') {
         //console.log('text is not get-quote text is', text)
         $(text).css('display', 'flex')
-        if ($('.view-buttons').hasClass('hide') != true) {
-          $('.view-buttons').addClass('hide')
+        if ($('.total').hasClass('hide') != true && $('.item').hasClass('hide') != true) {
+          $('.total').addClass('hide')
+          $('.item').addClass('hide')
         }
       } else {
         //console.log('run else')
@@ -280,7 +281,8 @@ function showPrices() {
 
   let gearPrevious = gear;
 
-  $('.view-buttons').removeClass('hide')
+  $('.total').removeClass('hide')
+  $('.item').removeClass('hide')
   $('.searchResults').css('display', 'none')
   $('.tab-item').removeClass('active')
   $('.get-quote').removeClass('hide')
@@ -293,24 +295,24 @@ function showPrices() {
     $('.item').removeClass('active')
   }
 
-    $('.total-buy-prices-grid').html(`<span class="conditions">Pre-owned Mint</span><span class="conditions">Used Light Wear</span><span class="conditions">Used Medium Wear</span><span class="conditions">Used Heavy Wear</span><span class="conditions">Used Semi-functional</span> <span class="conditions-short">P.O.M</span>
+    $('.total-buy-prices-grid').html(`<span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
       <span class="conditions-short">U.L.W</span>
       <span class="conditions-short">U.M.W</span>
       <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${gear[0].getTotalPrice('pom', 'buy')}</span><span class="price">${gear[0].getTotalPrice('ulw', 'buy')}</span><span class="price">${gear[0].getTotalPrice('umw', 'buy')}</span><span class="price">${gear[0].getTotalPrice('uhw','buy')}</span><span class="price">${gear[0].getTotalPrice('usf','buy')}</span>`)
-    $('.total-trade-prices-grid').html(`<span class="conditions">Pre-owned Mint</span><span class="conditions">Used Light Wear</span><span class="conditions">Used Medium Wear</span><span class="conditions">Used Heavy Wear</span><span class="conditions">Used Semi-functional</span> <span class="conditions-short">P.O.M</span>
+    $('.total-trade-prices-grid').html(`<span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
       <span class="conditions-short">U.L.W</span>
       <span class="conditions-short">U.M.W</span>
       <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${gear[0].getTotalPrice('pom', 'trd')}</span><span class="price">${gear[0].getTotalPrice('ulw','trd')}</span><span class="price">${gear[0].getTotalPrice('umw', 'trd')}</span><span class="price">${gear[0].getTotalPrice('uhw','trd')}</span><span class="price">${gear[0].getTotalPrice('usf','trd')}</span>`)
 
     for (i=0; i<selectedNum; i++) {
-      $('.item-view').append(`<h2 class="item-view-title">${gear[i].name} Buy Prices</h2><div class="item-buy-prices-grid prices-grid hide"><span class="conditions">Pre-owned Mint</span><span class="conditions">Used Light Wear</span><span class="conditions">Used Medium Wear</span><span class="conditions">Used Heavy Wear</span><span class="conditions">Used Semi-functional</span> <span class="conditions-short">P.O.M</span>
+      $('.item-view').append(`<div class="grid-container"><div class="item-view-title">${gear[i].name} Buy Prices</div><div class="item-buy-prices-grid prices-grid hide"><span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
       <span class="conditions-short">U.L.W</span>
       <span class="conditions-short">U.M.W</span>
-      <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${gear[i].getBuyPrice("pom")}</span><span class="price">${gear[i].getBuyPrice("ulw")}</span><span class="price">${gear[i].getBuyPrice("umw")}</span><span class="price">${gear[i].getBuyPrice("uhw")}</span><span class="price">${gear[i].getBuyPrice("usf")}</span></div>`)
-      $('.item-view').append(`<h2 class="item-view-title">${gear[i].name} Trade Prices</h2><div class="item-trade-prices-gird prices-grid hide"><span class="conditions">Pre-owned Mint</span><span class="conditions">Used Light Wear</span><span class="conditions">Used Medium Wear</span><span class="conditions">Used Heavy Wear</span><span class="conditions">Used Semi-functional</span> <span class="conditions-short">P.O.M</span>
+      <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${gear[i].getBuyPrice("pom")}</span><span class="price">${gear[i].getBuyPrice("ulw")}</span><span class="price">${gear[i].getBuyPrice("umw")}</span><span class="price">${gear[i].getBuyPrice("uhw")}</span><span class="price">${gear[i].getBuyPrice("usf")}</span></div></div>`)
+      $('.item-view').append(`<div class="grid-container"><div class="item-view-title">${gear[i].name} Trade Prices</div><div class="item-trade-prices-gird prices-grid hide"><span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
       <span class="conditions-short">U.L.W</span>
       <span class="conditions-short">U.M.W</span>
-      <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${gear[i].getTrdPrice("pom")}</span><span class="price">${gear[i].getTrdPrice("ulw")}</span><span class="price">${gear[i].getTrdPrice("umw")}</span><span class="price">${gear[i].getTrdPrice("uhw")}</span><span class="price">${gear[i].getTrdPrice("usf")}</span></div>`)
+      <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${gear[i].getTrdPrice("pom")}</span><span class="price">${gear[i].getTrdPrice("ulw")}</span><span class="price">${gear[i].getTrdPrice("umw")}</span><span class="price">${gear[i].getTrdPrice("uhw")}</span><span class="price">${gear[i].getTrdPrice("usf")}</span></div></div>`)
     }
 
     $('.total').on('click', function(e){
@@ -338,18 +340,18 @@ function showPrices() {
 }
 
 function handleAccordionClick() {
-  let priceGridElements = $('.item-view').children().not('h2')
+  let priceGridElements = $('.item-view').children().not('.item-view-title, .grid-container')
   console.log('priceGridElements', priceGridElements)
 
   $('.item-view-title').on('click', function(e){
     e.stopPropagation()
     console.log('click registered')
-    priceGridElements.each(function(){
-      if($(this).hasClass('hide') != true) {
-        $(this).addClass('hide')
-      }
-    })
-    $(this).next().removeClass('hide')
+    if($(this).next().hasClass('hide') == false) {
+      $(this).next().addClass('hide')
+    } else {
+        $(this).next().removeClass('hide')
+    }
+
   })
 }
 
@@ -435,7 +437,7 @@ for(i=0; i<searchResultsElements.length; i++){
 let getDataCounter = 0;
 const resultsArray = []
 let rejects = []
-const acceptedCatIDs = ["30093", "31388", "3323", "15230", "162480", "83857", "29994", "43440", "64345", "50506", "167930", "179697", "170066", "29965", "43479", "64353", "30078", "30090"]
+const acceptedCatIDs = ["30093", "69573", "30097", "172511", "31388", "3323", "29967", "15230", "162480", "83857", "29994", "43440", "64345", "50506", "167930", "179697", "170066", "29965", "43479", "64353", "30078", "30090"]
 let verifyDataCounter = 0;
 let catIDs
 let responses
@@ -444,19 +446,27 @@ let searchIDs
 
 async function verifyData(searchObj) {
 
+  try {
+    let response = await fetchJsonp(searchObj.url)
+    let data = await response.json()
+    responses.push(data)
+    searchIDs.push(searchObj.id)
+    let items = data.findCompletedItemsResponse[0].searchResult[0].item || []
+    console.log(`items is: ${items}`)
+    let item = items[0]
+    console.log(`item is: ${item}`)
+    let categoryID = item.primaryCategory[0].categoryId[0]
+    console.log(`categoryID is: ${categoryID}`)
+    catIDs.push(categoryID)
+    console.log(`catIDS is: ${catIDs}`)
 
-  let response = await fetchJsonp(searchObj.url)
-  let data = await response.json()
-  responses.push(data)
-  searchIDs.push(searchObj.id)
-  let items = data.findCompletedItemsResponse[0].searchResult[0].item || []
-  console.log(`items is: ${items}`)
-  let item = items[0]
-  console.log(`item is: ${item}`)
-  let categoryID = item.primaryCategory[0].categoryId[0]
-  console.log(`categoryID is: ${categoryID}`)
-  catIDs.push(categoryID)
-  console.log(`catIDS is: ${catIDs}`)
+  } catch(e){
+      if(e instanceof TypeError){
+        alert(`Search number ${searchObj.id + 1} returned no results`)
+        throw new Error('1 or more searches returned no results. Modify and search again.')
+      }
+  }
+
   verifyDataCounter++
   console.log(`verifyDataCounter before if: ${verifyDataCounter}`)
 
@@ -555,7 +565,7 @@ function getSearchTerms(){
  function buildRequestUrl(item) {
 
      baseURL = "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&SERVICE-VERSION=1.7.0&SECURITY-APPNAME=RoryGarc-priceGen-PRD-55d8a3c47-c767674d&GLOBAL-ID=EBAY-US&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=";
-     endURL = "&itemFilter(0).name=Condition&itemFilter(0).value=3000&itemFilter(1).name=SoldItemsOnly&itemFilter(1).value=true&paginationInput.entriesPerPage=8&paginationInput.pageNumber=1";
+     endURL = "&itemFilter(0).name=Condition&itemFilter(0).value=3000&itemFilter(1).name=SoldItemsOnly&itemFilter(1).value=true&paginationInput.entriesPerPage=12&paginationInput.pageNumber=1";
      let requestUrl = baseURL.concat(item.split(' ').join('+'), endURL);
      return requestUrl
  }
@@ -566,7 +576,7 @@ function createInputs(numTerms) {
   toggleDisplay('.step-2')
   let id = "id"
   for (let i=0; i<numTerms; ++i) {
-    $('.input-container-flex').prepend(`<div class="inner-input"><input class="search-box" type="text" required placeholder="Enter equipment model name" list="inv_list"></div>`)
+    $('.instruction-2').after(`<div class="inner-input"><input class="search-box" type="text" required placeholder="Search photo gear" list="inv_list"></div>`)
     $('.search-box').autocomplete({
       source: ["Sony a7S II", "Sony a7S", "Sony a7", "Sony a7 II", "Sony a7 III", "Sony a9", "Sony a7R", "Sony a7R II", "Sony a7R II", "Canon EOS 5D", "Canon EOS 5D Mark II", "Canon EOS 5D Mark III" ]
 
@@ -590,11 +600,13 @@ function startQuote() {
     e.stopPropagation()
     location.reload()
   })
+
   $('.num-opt').click(function(e){
     e.preventDefault()
     selectedNum = this.id;
     createInputs(selectedNum)
   })
+
 }
 
 $(startQuote);
