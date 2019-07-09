@@ -373,6 +373,14 @@ li {
 
 }
 
+nav {
+  height: 50px;
+  min-width: 35vw;
+  right: 0;
+  top: 0;
+  position: absolute;
+}
+
 .view-buttons button.active {
   background-color: transparent;
   /* border-left: 8px solid #BAD9D9; */
@@ -380,6 +388,7 @@ li {
   /* border-top: 8px solid #BAD9D9; */
   color: black;
   border-bottom: 5px solid red;
+  height: 100%;
 }
 
 .view-buttons button:hover {
