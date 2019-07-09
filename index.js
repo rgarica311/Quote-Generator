@@ -576,7 +576,7 @@ function createInputs(numTerms) {
   toggleDisplay('.step-2')
   let id = "id"
   for (let i=0; i<numTerms; ++i) {
-    $('.instruction-2').after(`<div class="inner-input"><input class="search-box" type="text" required placeholder="Search photo gear" list="inv_list"></div>`)
+    $('.instruction-2').after(`<div class="inner-input"><input class="search-box" type="text" title="Equipment Search Box" required placeholder="Search photo gear" list="inv_list"></div>`)
     $('.search-box').autocomplete({
       source: ["Sony a7S II", "Sony a7S", "Sony a7", "Sony a7 II", "Sony a7 III", "Sony a9", "Sony a7R", "Sony a7R II", "Sony a7R II", "Canon EOS 5D", "Canon EOS 5D Mark II", "Canon EOS 5D Mark III" ]
 
