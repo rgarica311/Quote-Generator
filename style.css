@@ -101,7 +101,7 @@ p {
 
 
 .bg-img-container {
-  background-image: url('./Assets/bg-img.jpg');
+  background-image: url('Quote-Generator/Assets/bg-img.jpg');
   background-size: cover;
   background-position: center;
   width: 100vw;
