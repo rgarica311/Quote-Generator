@@ -6,6 +6,8 @@ they wish to sell or trade.
 
 The application allows the user to quote from 1 to 7 pieces of equipment at once. It uses the eBay api to search for sold listings and calculate a value based on the average sold price of completed listings.  
 
+https://rgarica311.github.io/Quote-Generator/
+
 ## Instructions
 
 Step 1: Choose the number of pieces you wish to look up. 
