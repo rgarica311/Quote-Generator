@@ -13,7 +13,6 @@ body {
   font-size: 100%;
   font-style: normal;
   font-weight: 300;
-  line-height: 1;
 }
 
 html, body {
@@ -48,11 +47,16 @@ a {
   cursor: pointer;
 }
 
+a:hover {
+  color: #F2EFE9;
+}
+
 .directions {
   margin-bottom: 15px;
   text-decoration: none;
   color: black;
   font-family: 'Raleway', sans-serif
+  line-heightt: 1.5em;
 }
 
 .GET-QUOTE {
@@ -72,6 +76,11 @@ a {
   text-transform: uppercase;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.97);
   cursor: pointer;
+}
+
+fieldset {
+  border-style: none;
+  text-align: center;
 }
 
 header {
@@ -161,6 +170,7 @@ p {
   font-size: 8rem;
   font-weight: bold;
   cursor: pointer;
+  color: #F2EFE9;
 }
 
 .input-container-flex {
@@ -208,6 +218,10 @@ p {
   margin-right: 10px;
   margin-bottom: 10px;
   max-width: 300px;
+}
+
+.card-container:hover {
+  cursor: pointer;
 }
 
 .card-rotate {
@@ -280,6 +294,8 @@ img {
 
 li:hover {
   cursor: pointer;
+  background-color: #F2EFE9;
+  color: black;
 }
 
 
@@ -384,9 +400,7 @@ nav {
   height: 100%;
 }
 
-.view-buttons button:hover {
-  /* background-color: #F2EFE9; */
-}
+
 
 div.empty-error, div.type-error, div.cat-error {
   position: absolute;
@@ -413,7 +427,7 @@ div.empty-error, div.type-error, div.cat-error {
 
 .nav-item:hover {
   cursor: pointer;
-  color: black;
+  color: #F2EFE9;;
 }
 
 .nav-item {
@@ -467,6 +481,7 @@ div.empty-error, div.type-error, div.cat-error {
 /* Change background color of buttons on hover */
 .item-header-tabs button:hover {
   background-color: #F2EFE9;
+  color: black;
 }
 
 /* Create an active/current "tab button" class */
@@ -614,16 +629,6 @@ footer {
 
 
 
-@media screen and (min-width: 522px) {
-
-
-  .search-box {
-    height: 4vh;
-  }
-
-}
-
-
 @media screen and (max-width: 578px){
 
   .instruction {
@@ -674,7 +679,11 @@ footer {
 @media screen and (max-width: 367px) {
 
   .prices-grid {
-    font-size: .85rem;
+    font-size: .6rem;
+  }
+
+  .item-view-title {
+    padding: 10px;
   }
 
 }

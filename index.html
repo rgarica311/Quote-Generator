@@ -25,11 +25,11 @@
 <body>
 
   <header>
-    <div class="logo">QuoteGen</div>
+    <div role="banner" class="logo">QuoteGen</div>
   </header>
 
   <nav>
-    <div class="view-buttons">
+    <div role="navigation" class="view-buttons">
       <button class="nav-item total hide">Total View</button>
       <button class="nav-item item hide">Item View</button>
       <button class="nav-item open-directions"><a href="#ex1" rel="modal:open">Directions</a></button>
@@ -38,71 +38,68 @@
 
 
 <main>
-
-  <section class="step-1" style="display: block">
-    <div class="bg-img-container"></div>
-    <div class="instruction">How many items do you want to quote?</div>
-
-    <div class="scroll-container-flex">
-      <div id="1" class="num-opt">1</div>
-      <div id="2" class="num-opt">2</div>
-      <div id="3" class="num-opt">3</div>
-      <div id="4" class="num-opt">4</div>
-      <div id="5" class="num-opt">5</div>
-      <div id="6" class="num-opt">6</div>
-    </div>
+  <section class="step-1" style="display: block" aria-live="polite">
+    <div role="img" class="bg-img-container"></div>
+    <fieldset>
+      <legend class="instruction">How many items do you want to quote?</legend>
+      <div role="listbox" aria-orientation="horizontal" class="scroll-container-flex">
+        <div role="option" aria-selected="false" id="1" class="num-opt">1</div>
+        <div role="option" aria-selected="false" id="2" class="num-opt">2</div>
+        <div role="option" aria-selected="false" id="3" class="num-opt">3</div>
+        <div role="option" aria-selected="false" id="4" class="num-opt">4</div>
+        <div role="option" aria-selected="false" id="5" class="num-opt">5</div>
+        <div role="option" aria-selected="false" id="6" class="num-opt">6</div>
+      </div>
+    </fieldset>
   </section>
 
-  <section class="step-2" style="display: none">
+  <section class="step-2" style="display: none" aria-live="polite">
 
-    <div class="bg-img-container"></div>
-
-    <div class="input-container-flex">
-      <div class="instruction-2">Search for photo equipment.</div>
-
+    <div role="img" class="bg-img-container"></div>
+    <div role="search" class="input-container-flex">
+      <fieldset>
+      <legend class="instruction-2">Search for photo equipment.</legend>
       <div class="srch-restart-buttons">
         <button type="button" class="search-button">Search</button>
         <button type="button" class="restart-2">Restart</button>
       </div>
-
+      </fieldset>
     </div>
 
   </section>
 
-  <section class="step-3" style="display: none">
+  <section class="step-3" style="display: none" aria-live="polite">
 
-    <div class="results-container" id="resultsContainer">
+    <div role="region" class="results-container" id="resultsContainer" aria-live="polite">
 
-      <div class="item-header-tabs">
+      <div role="navigation" class="item-header-tabs"></div>
 
-      </div>
+      <div role="region" class="GET-QUOTE">
 
-      <div class="GET-QUOTE">
-
-        <div class="total-view-flex hide">
+        <div role="region" class="total-view-flex hide">
 
           <div class="grid-container">
             <div class="quote-label">Buy Prices</div>
             <div class="total-buy-prices-grid prices-grid"></div>
           </div>
 
-          <div class="grid-container">
+          <div role="region" class="grid-container">
             <div class="quote-label">Trade Prices</div>
             <div class="total-trade-prices-grid prices-grid"></div>
           </div>
 
         </div>
 
-        <div class="item-view hide"></div>
+        <div role="region" class="item-view hide"></div>
 
       </div>
 
-      </div>
+    </div>
 
-    </section>
+  </section>
 
 <!-- Modal HTML embedded directly into document -->
-<div id="ex1" class="modal">
+<div role="region" aria-label="directions" id="ex1" class="modal">
   <h1>QuoteGen</h1>
   <p class="directions">Many camera stores deal in second hand photographic
     equipment. The purpose of this application is to make
@@ -115,7 +112,7 @@
     search for sold listings and calculate a value based
     on the average sold price of completed listings.</p>
 
-  <h2>Instructions</h2>
+    <h2>Instructions</h2>
     <span class="bold-span">Step 1:</span>
     <p class="directions">Choose the number of pieces you wish to look up.</p>
 
@@ -145,24 +142,22 @@
     to trade in their equipment against something from the store versus
     simplying selling outright for cash.</p>
 
-  <h2>Requirements</h2>
-  <p class="directions">Make sure any browser extensions such as adblock, ublock, disconnect, are disabled.</p>
-</div>
+    <h2>Requirements</h2>
+    <p class="directions">Make sure any browser extensions such as adblock, ublock, disconnect, are disabled.</p>
+  </div>
 
-<div id="lower-modal-empty" class="modal empty-error">
-  <p>One or more inputs are empty!</p>
-  <a id="empty-close" rel="modal:close" class="close-modal">Close</a>
-</div>
+  <div id="lower-modal-empty" class="modal empty-error">
+    <p>One or more inputs are empty!</p>
+    <a id="empty-close" rel="modal:close" class="close-modal">Close</a>
+  </div>
 
-<div id="lower-modal-type" class="modal type-error">
+  <div id="lower-modal-type" class="modal type-error">
+    <a id="type-close" rel="modal:close" class="close-modal">Close</a>
+  </div>
 
-  <a id="type-close" rel="modal:close" class="close-modal">Close</a>
-</div>
-
-<div id="lower-modal-cat" class="modal cat-error">
-
-  <a id="cat-close" rel="modal:close" class="close-modal">Close</a>
-</div>
+  <div id="lower-modal-cat" class="modal cat-error">
+    <a id="cat-close" rel="modal:close" class="close-modal">Close</a>
+  </div>
 
 
 </main>
