@@ -12,7 +12,7 @@ const QuoteGen = {
 
 
 //Define list of accepted eBay category ID's
-const acceptedCatIDs = ["30093", "69573", "30097", "172511", "31388", "3323", "29967", "15230", "162480", "83857", "29994", "43440", "64345", "50506", "167930", "179697", "170066", "29965", "43479", "64353", "30078", "30090"]
+const acceptedCatIDs = ["30093", "30059", "69573", "30097", "172511", "31388", "3323", "29967", "15230", "162480", "83857", "29994", "43440", "64345", "50506", "167930", "179697", "170066", "29965", "43479", "64353", "30078", "30090"]
 
 //Process returned json data
 function processData(result, id) {
@@ -40,7 +40,7 @@ function processData(result, id) {
                       &lt;div class="img-container" id="js-bg-img-${index}-${x}"&gt;
                       &lt/div&gt;
                       &lt;div class="container"&gt;
-                      &lt;p aria-label="item title"&gt;${itemName}&lt;/p&gt;
+                      &lt;p class="card-description" aria-label="item title"&gt;${itemName}&lt;/p&gt;
                       &lt;p class="p-bottom"&gt;Sold Price:&lt;span aria-label="sold price" class="price"&gt;${soldPrice}&lt;/span>&lt;/p&gt;
                       &lt;/div&gt;
                       &lt;/div&gt;
@@ -67,7 +67,7 @@ function processData(result, id) {
                     &lt;div class="img-container" id="js-bg-img-${index}-${x}"&gt;
                     &lt/div&gt;
                     &lt;div class="container"&gt;
-                    &lt;p aria-label="item title"&gt;${itemName}&lt;/p&gt;
+                    &lt;p class="card-description" aria-label="item title"&gt;${itemName}&lt;/p&gt;
                     &lt;p class="p-bottom"&gt;Sold Price:&lt;span aria-label="sold price" class="price"&gt;${soldPrice}&lt;/span>&lt;/p&gt;
                     &lt;/div&gt;
                     &lt;/div&gt;
@@ -408,6 +408,7 @@ async function verifyData(searchObj) {
     let items = data.findCompletedItemsResponse[0].searchResult[0].item || []
     let item = items[0]
     let categoryID = item.primaryCategory[0].categoryId[0]
+    console.log('categoryID', categoryID)
     QuoteGen.catIDs.push(categoryID)
 
   } catch(e){
