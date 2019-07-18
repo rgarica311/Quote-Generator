@@ -166,8 +166,8 @@ function getTotalPrice(condition, calc) {
   const trdPrices = [this.getTrdPrice(condition)]
   const buyPrices = [this.getBuyPrice(condition)]
 
-  if(gear.length > 1) {
-    for(i=1; i<gear.length; i++) {
+  if(QuoteGen.gear.length > 1) {
+    for(i=1; i<QuoteGen.gear.length; i++) {
       let trdPrice = QuoteGen.gear[i].getTrdPrice(condition)
       let buyPrice = QuoteGen.gear[i].getBuyPrice(condition)
       trdPrices.push(trdPrice)
@@ -254,7 +254,6 @@ function getTrdPrice(condition) {
 
 function showPrices() {
 
-  let gearPrevious = gear
 
   $('.total').removeClass('hide')
   $('.item').removeClass('hide')
