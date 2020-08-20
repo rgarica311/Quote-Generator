@@ -37,17 +37,11 @@
   </nav>
 
 
-<main>
-  <section class="step-1" style="display: block" aria-live="polite">
-<<<<<<< HEAD
-    <div role="img" class="bg-img-container"></div>
-    <fieldset>
-      <legend class="instruction">How many items do you want to quote?</legend>
-=======
-    <div role="img" aria-label="closeup image hands holding camera" class="bg-img-container"></div>
+  <main>
+    <section class="step-1" style="display: block" aria-live="polite">
+      <div role="img" aria-label="closeup image hands holding camera" class="bg-img-container"></div>
 
       <div class="instruction">How many items do you want to quote?</div>
->>>>>>> c185f8cf7a120080829e56341b215ed8fd83e172
       <div role="listbox" aria-orientation="horizontal" class="scroll-container-flex">
         <div role="option" aria-selected="false" id="1" class="num-opt">1</div>
         <div role="option" aria-selected="false" id="2" class="num-opt">2</div>
@@ -56,124 +50,116 @@
         <div role="option" aria-selected="false" id="5" class="num-opt">5</div>
         <div role="option" aria-selected="false" id="6" class="num-opt">6</div>
       </div>
-<<<<<<< HEAD
-    </fieldset>
-=======
+    </section>
 
->>>>>>> c185f8cf7a120080829e56341b215ed8fd83e172
-  </section>
+    <section class="step-2" style="display: none" aria-live="polite">
 
-  <section class="step-2" style="display: none" aria-live="polite">
-
-<<<<<<< HEAD
-    <div role="img" class="bg-img-container"></div>
-=======
-    <div role="img" aria-label="closeup image hands holding camera" class="bg-img-container"></div>
->>>>>>> c185f8cf7a120080829e56341b215ed8fd83e172
-    <div role="search" class="input-container-flex">
-      <fieldset>
-      <legend class="instruction-2">Search for photo equipment.</legend>
-      <div class="srch-restart-buttons">
-        <button type="button" class="search-button">Search</button>
-        <button type="button" class="restart-2">Restart</button>
+      <div role="img" aria-label="closeup image hands holding camera" class="bg-img-container"></div>
+      <div role="search" class="input-container-flex">
+        <fieldset>
+          <legend class="instruction-2">Search for photo equipment.</legend>
+          <div class="srch-restart-buttons">
+            <button type="button" class="search-button">Search</button>
+            <button type="button" class="restart-2">Restart</button>
+          </div>
+        </fieldset>
       </div>
-      </fieldset>
-    </div>
 
-  </section>
+    </section>
 
-  <section class="step-3" style="display: none" aria-live="polite">
+    <section class="step-3" style="display: none" aria-live="polite">
 
-    <div role="region" class="results-container" id="resultsContainer" aria-live="polite">
+      <div role="region" class="results-container" id="resultsContainer" aria-live="polite">
 
-      <div role="navigation" class="item-header-tabs"></div>
+        <div role="navigation" class="item-header-tabs"></div>
 
-      <div role="region" class="GET-QUOTE">
+        <div role="region" class="GET-QUOTE">
 
-        <div role="region" class="total-view-flex hide">
+          <div role="region" class="total-view-flex hide">
 
-          <div class="grid-container">
-            <div class="quote-label">Buy Prices</div>
-            <div class="total-buy-prices-grid prices-grid"></div>
+            <div class="grid-container">
+              <div class="quote-label">Buy Prices</div>
+              <div class="total-buy-prices-grid prices-grid"></div>
+            </div>
+
+            <div role="region" class="grid-container">
+              <div class="quote-label">Trade Prices</div>
+              <div class="total-trade-prices-grid prices-grid"></div>
+            </div>
+
           </div>
 
-          <div role="region" class="grid-container">
-            <div class="quote-label">Trade Prices</div>
-            <div class="total-trade-prices-grid prices-grid"></div>
-          </div>
+          <div role="region" class="item-view hide"></div>
 
         </div>
 
-        <div role="region" class="item-view hide"></div>
-
       </div>
 
+    </section>
+
+    <!-- Modal HTML embedded directly into document -->
+    <div role="region" aria-label="directions" id="ex1" class="modal">
+      <h1>QuoteGen</h1>
+      <p class="directions">Many camera stores deal in second hand photographic
+        equipment. The purpose of this application is to make
+        it easy for employees of camera stores to quickly offer
+        quotes to customers for the equipment they wish to
+        sell or trade.</p>
+
+      <p class="directions">The application allows the user to quote from 1 to 7
+        pieces of equipment at once. It uses the eBay api to
+        search for sold listings and calculate a value based
+        on the average sold price of completed listings.</p>
+
+      <h2>Instructions</h2>
+      <span class="bold-span">Step 1:</span>
+      <p class="directions">Choose the number of pieces you wish to look up.</p>
+
+      <span class="bold-span">Step 2:</span>
+      <p class="directions">Enter once piece of camera equipment per input box.
+        Examples: Canon 5D Mark III, Sony a7s II.</p>
+
+      <span class="bold-span">Step 3:</span>
+      <p class="directions">The results are displayed as cards with a picture of
+        the item, description and sold price. The user is meant
+        to sift through these results and make sure they represent
+        what they are lookng for. If there is any item that doesn't
+        quite fit what the user is looking for they can click on
+        that card.</p>
+
+      <p class="directions">It will flip around and the associated price would not be
+        inlcuded in the calculation. To re-add the item simply click
+        the card again. Once you are satisfied with the results
+        you click calculate to see the prices you should offer.</p>
+
+      <span class="bold-span">Step 4:</span>
+      <p class="directions">When viewing the quote results you can look at it in a total
+        view and a per item view. Both views are seperated into buy
+        and trade prices depending on the quality of the item being purchased.</p>
+
+      <p class="directions">Typically camera stores offer more money for if the customer wants
+        to trade in their equipment against something from the store versus
+        simplying selling outright for cash.</p>
+
+      <h2>Requirements</h2>
+      <p class="directions">Make sure any browser extensions such as adblock, ublock, disconnect, are disabled.</p>
     </div>
 
-  </section>
+    <div id="lower-modal-empty" class="modal empty-error">
+      <p>One or more inputs are empty!</p>
+      <a id="empty-close" rel="modal:close" class="close-modal">Close</a>
+    </div>
 
-<!-- Modal HTML embedded directly into document -->
-<div role="region" aria-label="directions" id="ex1" class="modal">
-  <h1>QuoteGen</h1>
-  <p class="directions">Many camera stores deal in second hand photographic
-    equipment. The purpose of this application is to make
-    it easy for employees of camera stores to quickly offer
-    quotes to customers for the equipment they wish to
-    sell or trade.</p>
+    <div id="lower-modal-type" class="modal type-error">
+      <a id="type-close" rel="modal:close" class="close-modal">Close</a>
+    </div>
 
-    <p class="directions">The application allows the user to quote from 1 to 7
-    pieces of equipment at once. It uses the eBay api to
-    search for sold listings and calculate a value based
-    on the average sold price of completed listings.</p>
-
-    <h2>Instructions</h2>
-    <span class="bold-span">Step 1:</span>
-    <p class="directions">Choose the number of pieces you wish to look up.</p>
-
-    <span class="bold-span">Step 2:</span>
-    <p class="directions">Enter once piece of camera equipment per input box.
-    Examples: Canon 5D Mark III, Sony a7s II.</p>
-
-    <span class="bold-span">Step 3:</span>
-    <p class="directions">The results are displayed as cards with a picture of
-    the item, description and sold price. The user is meant
-    to sift through these results and make sure they represent
-    what they are lookng for. If there is any item that doesn't
-    quite fit what the user is looking for they can click on
-    that card.</p>
-
-    <p class="directions">It will flip around and the associated price would not be
-    inlcuded in the calculation. To re-add the item simply click
-    the card again. Once you are satisfied with the results
-    you click calculate to see the prices you should offer.</p>
-
-    <span class="bold-span">Step 4:</span>
-    <p class="directions">When viewing the quote results you can look at it in a total
-    view and a per item view. Both views are seperated into buy
-    and trade prices depending on the quality of the item being purchased.</p>
-
-    <p class="directions">Typically camera stores offer more money for if the customer wants
-    to trade in their equipment against something from the store versus
-    simplying selling outright for cash.</p>
-
-    <h2>Requirements</h2>
-    <p class="directions">Make sure any browser extensions such as adblock, ublock, disconnect, are disabled.</p>
-  </div>
-
-  <div id="lower-modal-empty" class="modal empty-error">
-    <p>One or more inputs are empty!</p>
-    <a id="empty-close" rel="modal:close" class="close-modal">Close</a>
-  </div>
-
-  <div id="lower-modal-type" class="modal type-error">
-    <a id="type-close" rel="modal:close" class="close-modal">Close</a>
-  </div>
-
-  <div id="lower-modal-cat" class="modal cat-error">
-    <a id="cat-close" rel="modal:close" class="close-modal">Close</a>
-  </div>
+    <div id="lower-modal-cat" class="modal cat-error">
+      <a id="cat-close" rel="modal:close" class="close-modal">Close</a>
+    </div>
 
 
-</main>
+  </main>
 </body>
+
 </html>
