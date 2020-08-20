@@ -1,22 +1,18 @@
 //Define global variables
-let selectedNum
-let processDataCalledTimes = 0
-let searchUrls = []
-let trdPrice
-let buyPRice
-let gear
-let gearName
-let verifyDataCounter = 0
-let catIDs
-let responses
-let isSuperset
-let searchIDs
-let getDataCounter = 0
-const resultsArray = []
-let rejects = []
+const QuoteGen = {
+   processDataCalledTimes: 0,
+   verifyDataCounter: 0,
+   selectedNum: null,
+   gear: null,
+   gearName: null,
+   catIDs: null,
+   responses: null,
+   searchIDs: null
+}
+
 
 //Define list of accepted eBay category ID's
-const acceptedCatIDs = ["30093", "69573", "30097", "172511", "31388", "3323", "29967", "15230", "162480", "83857", "29994", "43440", "64345", "50506", "167930", "179697", "170066", "29965", "43479", "64353", "30078", "30090"]
+const acceptedCatIDs = ["30093", "30059", "69573", "30097", "172511", "31388", "3323", "29967", "15230", "162480", "83857", "29994", "43440", "64345", "50506", "167930", "179697", "170066", "29965", "43479", "64353", "30078", "30090"]
 
 //Process returned json data
 function processData(result, id) {
@@ -25,7 +21,7 @@ function processData(result, id) {
 
   let searchResultsElements = $('.results-container').children().not('.item-header-tabs, .total-view-flex, .item-view, .GET-QUOTE')
 
-    processDataCalledTimes++
+    let runCounter = QuoteGen.processDataCalledTimes += 1
     let items = result.findCompletedItemsResponse[0].searchResult[0].item || []
     for (let j=0; j < items.length; ++j) {
         let item = items[j], title = item.title, pic = item.galleryURL, viewitem = item.viewItemURL, soldPrice = Math.round(item.sellingStatus[0].convertedCurrentPrice[0]["__value__"]), itemName = title.toString()
@@ -44,7 +40,7 @@ function processData(result, id) {
                       &lt;div class="img-container" id="js-bg-img-${index}-${x}"&gt;
                       &lt/div&gt;
                       &lt;div class="container"&gt;
-                      &lt;p aria-label="item title"&gt;${itemName}&lt;/p&gt;
+                      &lt;p class="card-description" aria-label="item title"&gt;${itemName}&lt;/p&gt;
                       &lt;p class="p-bottom"&gt;Sold Price:&lt;span aria-label="sold price" class="price"&gt;${soldPrice}&lt;/span>&lt;/p&gt;
                       &lt;/div&gt;
                       &lt;/div&gt;
@@ -71,7 +67,7 @@ function processData(result, id) {
                     &lt;div class="img-container" id="js-bg-img-${index}-${x}"&gt;
                     &lt/div&gt;
                     &lt;div class="container"&gt;
-                    &lt;p aria-label="item title"&gt;${itemName}&lt;/p&gt;
+                    &lt;p class="card-description" aria-label="item title"&gt;${itemName}&lt;/p&gt;
                     &lt;p class="p-bottom"&gt;Sold Price:&lt;span aria-label="sold price" class="price"&gt;${soldPrice}&lt;/span>&lt;/p&gt;
                     &lt;/div&gt;
                     &lt;/div&gt;
@@ -91,7 +87,7 @@ function processData(result, id) {
        }
     }
     //Once all data has been procesed store results in objects and get the prices
-    if (processDataCalledTimes === parseInt(selectedNum)) {
+    if (runCounter === QuoteGen.selectedNum) {
       createEquipObjects()
       handleVerticalTabs()
       getPrices()
@@ -140,9 +136,9 @@ function handleVerticalTabs() {
 
 //Create EquipObject for each search item
 function createEquipObjects() {
-  for(i=0; i<gear.length; i++){
-    gear[i] = new EquipObject
-    gear[i].name = gearName[i]
+  for(i=0; i<QuoteGen.gear.length; i++){
+    QuoteGen.gear[i] = new EquipObject
+    QuoteGen.gear[i].name = QuoteGen.gearName[i]
   }
 
 }
@@ -170,10 +166,10 @@ function getTotalPrice(condition, calc) {
   const trdPrices = [this.getTrdPrice(condition)]
   const buyPrices = [this.getBuyPrice(condition)]
 
-  if(gear.length > 1) {
-    for(i=1; i<gear.length; i++) {
-      let trdPrice = gear[i].getTrdPrice(condition)
-      let buyPrice = gear[i].getBuyPrice(condition)
+  if(QuoteGen.gear.length > 1) {
+    for(i=1; i<QuoteGen.gear.length; i++) {
+      let trdPrice = QuoteGen.gear[i].getTrdPrice(condition)
+      let buyPrice = QuoteGen.gear[i].getBuyPrice(condition)
       trdPrices.push(trdPrice)
       buyPrices.push(buyPrice)
     }
@@ -258,7 +254,6 @@ function getTrdPrice(condition) {
 
 function showPrices() {
 
-  let gearPrevious = gear
 
   $('.total').removeClass('hide')
   $('.item').removeClass('hide')
@@ -277,22 +272,22 @@ function showPrices() {
     $('.total-buy-prices-grid').html(`<span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
       <span class="conditions-short">U.L.W</span>
       <span class="conditions-short">U.M.W</span>
-      <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${gear[0].getTotalPrice('pom', 'buy')}</span><span class="price">${gear[0].getTotalPrice('ulw', 'buy')}</span><span class="price">${gear[0].getTotalPrice('umw', 'buy')}</span><span class="price">${gear[0].getTotalPrice('uhw','buy')}</span><span class="price">${gear[0].getTotalPrice('usf','buy')}</span>`)
+      <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${QuoteGen.gear[0].getTotalPrice('pom', 'buy')}</span><span class="price">${QuoteGen.gear[0].getTotalPrice('ulw', 'buy')}</span><span class="price">${QuoteGen.gear[0].getTotalPrice('umw', 'buy')}</span><span class="price">${QuoteGen.gear[0].getTotalPrice('uhw','buy')}</span><span class="price">${QuoteGen.gear[0].getTotalPrice('usf','buy')}</span>`)
     $('.total-trade-prices-grid').html(`<span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
       <span class="conditions-short">U.L.W</span>
       <span class="conditions-short">U.M.W</span>
-      <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${gear[0].getTotalPrice('pom', 'trd')}</span><span class="price">${gear[0].getTotalPrice('ulw','trd')}</span><span class="price">${gear[0].getTotalPrice('umw', 'trd')}</span><span class="price">${gear[0].getTotalPrice('uhw','trd')}</span><span class="price">${gear[0].getTotalPrice('usf','trd')}</span>`)
+      <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${QuoteGen.gear[0].getTotalPrice('pom', 'trd')}</span><span class="price">${QuoteGen.gear[0].getTotalPrice('ulw','trd')}</span><span class="price">${QuoteGen.gear[0].getTotalPrice('umw', 'trd')}</span><span class="price">${QuoteGen.gear[0].getTotalPrice('uhw','trd')}</span><span class="price">${QuoteGen.gear[0].getTotalPrice('usf','trd')}</span>`)
 
     //Insert per item prices into the DOM
-    for (i=0; i<selectedNum; i++) {
-      $('.item-view').append(`<div class="grid-container"><div aria-expanded="false" aria-controls="buy${i}" class="item-view-title">${gear[i].name} Buy Prices</div><div id="buy${i}" aria-hidden="true" class="item-buy-prices-grid prices-grid hide"><span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
+    for (i=0; i<QuoteGen.selectedNum; i++) {
+      $('.item-view').append(`<div class="grid-container"><div aria-expanded="false" aria-controls="buy${i}" class="item-view-title">${QuoteGen.gear[i].name} Buy Prices</div><div id="buy${i}" aria-hidden="true" class="item-buy-prices-grid prices-grid hide"><span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
       <span class="conditions-short">U.L.W</span>
       <span class="conditions-short">U.M.W</span>
-      <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${gear[i].getBuyPrice("pom")}</span><span class="price">${gear[i].getBuyPrice("ulw")}</span><span class="price">${gear[i].getBuyPrice("umw")}</span><span class="price">${gear[i].getBuyPrice("uhw")}</span><span class="price">${gear[i].getBuyPrice("usf")}</span></div></div>`)
-      $('.item-view').append(`<div class="grid-container"><div aria-expanded="false" aria-controls="trade${i}" class="item-view-title">${gear[i].name} Trade Prices</div><div id="trade${i}" aria-hidden="true" class="item-trade-prices-gird prices-grid hide"><span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
+      <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${QuoteGen.gear[i].getBuyPrice("pom")}</span><span class="price">${QuoteGen.gear[i].getBuyPrice("ulw")}</span><span class="price">${QuoteGen.gear[i].getBuyPrice("umw")}</span><span class="price">${QuoteGen.gear[i].getBuyPrice("uhw")}</span><span class="price">${QuoteGen.gear[i].getBuyPrice("usf")}</span></div></div>`)
+      $('.item-view').append(`<div class="grid-container"><div aria-expanded="false" aria-controls="trade${i}" class="item-view-title">${QuoteGen.gear[i].name} Trade Prices</div><div id="trade${i}" aria-hidden="true" class="item-trade-prices-gird prices-grid hide"><span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
       <span class="conditions-short">U.L.W</span>
       <span class="conditions-short">U.M.W</span>
-      <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${gear[i].getTrdPrice("pom")}</span><span class="price">${gear[i].getTrdPrice("ulw")}</span><span class="price">${gear[i].getTrdPrice("umw")}</span><span class="price">${gear[i].getTrdPrice("uhw")}</span><span class="price">${gear[i].getTrdPrice("usf")}</span></div></div>`)
+      <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${QuoteGen.gear[i].getTrdPrice("pom")}</span><span class="price">${QuoteGen.gear[i].getTrdPrice("ulw")}</span><span class="price">${QuoteGen.gear[i].getTrdPrice("umw")}</span><span class="price">${QuoteGen.gear[i].getTrdPrice("uhw")}</span><span class="price">${QuoteGen.gear[i].getTrdPrice("usf")}</span></div></div>`)
     }
 
     //Show total view when clicked
@@ -352,11 +347,11 @@ function handleCardClick() {
     let divID = div[0].id
 
     var divIndex = parseInt(divID.replace(/\D+/, ""))
-    let priceIndex = gear[divIndex].prices.indexOf(clickedPrice)
+    let priceIndex = QuoteGen.gear[divIndex].prices.indexOf(clickedPrice)
     if ($(this).hasClass('card-rotate') === true) {
-      gear[divIndex].prices.splice(priceIndex, 1)
+      QuoteGen.gear[divIndex].prices.splice(priceIndex, 1)
     } else {
-        gear[divIndex].prices.splice(idIndex, 0, clickedPrice)
+        QuoteGen.gear[divIndex].prices.splice(idIndex, 0, clickedPrice)
     }
   })
   $('.calc-button').on('click', function(){
@@ -394,7 +389,7 @@ function getPrices() {
       pricesPerItem.push(parseInt(priceElement))
     })
 
-  gear[i].prices = pricesPerItem
+  QuoteGen.gear[i].prices = pricesPerItem
   }
   handleCardClick()
 }
@@ -407,12 +402,13 @@ async function verifyData(searchObj) {
   try {
     let response = await fetch(searchObj.url)
     let data = await response.json()
-    responses.push(data)
-    searchIDs.push(searchObj.id)
+    QuoteGen.responses.push(data)
+    QuoteGen.searchIDs.push(searchObj.id)
     let items = data.findCompletedItemsResponse[0].searchResult[0].item || []
     let item = items[0]
     let categoryID = item.primaryCategory[0].categoryId[0]
-    catIDs.push(categoryID)
+    console.log('categoryID', categoryID)
+    QuoteGen.catIDs.push(categoryID)
 
   } catch(e){
       if(e instanceof TypeError){
@@ -423,24 +419,24 @@ async function verifyData(searchObj) {
       }
   }
 
-  verifyDataCounter++
+  let runCounter = QuoteGen.verifyDataCounter += 1
 
-  if(verifyDataCounter == selectedNum) {
+  if(runCounter === QuoteGen.selectedNum) {
     //Check that all category ID's from the search exist in the list of accepted ID's
-    isSuperset = catIDs.every(function (val) {
+    let isSuperset = QuoteGen.catIDs.every(function (val) {
       return acceptedCatIDs.indexOf(val) >= 0
     })
 
 
     if(isSuperset == true) {
 
-      for(let x=0; x<gearName.length; x++){
+      for(let x=0; x<QuoteGen.gearName.length; x++){
 
-        let term = gearName[x]
+        let term = QuoteGen.gearName[x]
         term = term.replace(/\s+/g, '-')
         term = term.replace(/\./g, '-')
 
-        $('.item-header-tabs').append(`<button class="tab-item">${gearName[x].toUpperCase()}</button>`)
+        $('.item-header-tabs').append(`<button class="tab-item">${QuoteGen.gearName[x].toUpperCase()}</button>`)
         $('#resultsContainer').append(`<div class="searchResults ${term.toUpperCase()}" id="result${x}" aria-live="polite"></div>`)
       }
 
@@ -448,8 +444,8 @@ async function verifyData(searchObj) {
       $('.item-header-tabs').append('<button type="button" class="restart-button">RESTART</button>')
 
       //If all returned data is accepted process that data for display to user
-      for(i=0; i<responses.length; i++){
-        processData(responses[i], searchIDs[i])
+      for(i=0; i<QuoteGen.responses.length; i++){
+        processData(QuoteGen.responses[i], QuoteGen.searchIDs[i])
       }
 
     } else {
@@ -458,7 +454,7 @@ async function verifyData(searchObj) {
     }
 
   } else {
-      console.log(`verifyDataCounter in else: ${verifyDataCounter}`)
+      console.log(`runCounter in else: ${runCounter}`)
   }
 
 }
@@ -469,13 +465,13 @@ function getSearchTerms(){
   $('.search-button').on('click', function(e){
     e.preventDefault()
     let i = 0;
-    verifyDataCounter = 0
+    QuoteGen.verifyDataCounter = 0
     $('.item-header-tabs').empty()
-    gear = []
-    gearName = []
-    catIDs = []
-    responses = []
-    searchIDs = []
+    QuoteGen.gear = []
+    QuoteGen.gearName = []
+    QuoteGen.catIDs = []
+    QuoteGen.responses = []
+    QuoteGen.searchIDs = []
 
     //Create search object for each input value
     $('.search-box').each(function($inputObj){
@@ -483,8 +479,8 @@ function getSearchTerms(){
       let item = $(this).val()
       if(item.length > 1) {
         let search = new SearchObject(buildRequestUrl(item), i, item)
-        gear.push(item)
-        gearName.push(item)
+        QuoteGen.gear.push(item)
+        QuoteGen.gearName.push(item)
 
         verifyData(search)
         i++
@@ -553,12 +549,10 @@ function startQuote() {
 //Get the number of search terms to create
   $('.num-opt').click(function(e){
     e.preventDefault()
-    selectedNum = this.id;
+    QuoteGen.selectedNum = parseInt(this.id)
     $(this).attr('aria-selected', "true")
-    createInputs(selectedNum)
+    createInputs(QuoteGen.selectedNum)
   })
-
-
 }
 
 $(startQuote)
