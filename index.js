@@ -1,21 +1,22 @@
 //Define global variables
-let selectedNum;
-let processDataCalledTimes = 0;
-let searchUrls = [];
-let trdPrice;
-let buyPRice;
-let gear;
-let gearName;
-let verifyDataCounter = 0;
-let catIDs;
-let responses;
-let isSuperset;
-let searchIDs;
-let getDataCounter = 0;
-const resultsArray = [];
-let rejects = [];
+let selectedNum
+let processDataCalledTimes = 0
+let searchUrls = []
+let trdPrice
+let buyPRice
+let gear
+let gearName
+let verifyDataCounter = 0
+let catIDs
+let responses
+let isSuperset
+let searchIDs
+let getDataCounter = 0
+const resultsArray = []
+let rejects = []
+
 //Define list of accepted eBay category ID's
-const acceptedCatIDs = ["30093", "69573", "30097", "172511", "31388", "3323", "29967", "15230", "162480", "83857", "29994", "43440", "64345", "50506", "167930", "179697", "170066", "29965", "43479", "64353", "30078", "30090"];
+const acceptedCatIDs = ["30093", "69573", "30097", "172511", "31388", "3323", "29967", "15230", "162480", "83857", "29994", "43440", "64345", "50506", "167930", "179697", "170066", "29965", "43479", "64353", "30078", "30090"]
 
 //Process returned json data
 function processData(result, id) {
@@ -43,8 +44,8 @@ function processData(result, id) {
                       &lt;div class="img-container" id="js-bg-img-${index}-${x}"&gt;
                       &lt/div&gt;
                       &lt;div class="container"&gt;
-                      &lt;p&gt;${itemName}&lt;/p&gt;
-                      &lt;p class="p-bottom"&gt;Sold Price:&lt;span class="price"&gt;${soldPrice}&lt;/span>&lt;/p&gt;
+                      &lt;p aria-label="item title"&gt;${itemName}&lt;/p&gt;
+                      &lt;p class="p-bottom"&gt;Sold Price:&lt;span aria-label="sold price" class="price"&gt;${soldPrice}&lt;/span>&lt;/p&gt;
                       &lt;/div&gt;
                       &lt;/div&gt;
                       &lt;div class="card-back"&gt;
@@ -70,8 +71,8 @@ function processData(result, id) {
                     &lt;div class="img-container" id="js-bg-img-${index}-${x}"&gt;
                     &lt/div&gt;
                     &lt;div class="container"&gt;
-                    &lt;p&gt;${itemName}&lt;/p&gt;
-                    &lt;p class="p-bottom"&gt;Sold Price:&lt;span class="price"&gt;${soldPrice}&lt;/span>&lt;/p&gt;
+                    &lt;p aria-label="item title"&gt;${itemName}&lt;/p&gt;
+                    &lt;p class="p-bottom"&gt;Sold Price:&lt;span aria-label="sold price" class="price"&gt;${soldPrice}&lt;/span>&lt;/p&gt;
                     &lt;/div&gt;
                     &lt;/div&gt;
                     &lt;div class="card-back"&gt;
@@ -196,30 +197,30 @@ function getBuyPrice(condition) {
   let avg = calculateAvg(this)
   switch (condition) {
     case "pom":
-      buyPrice = Math.round(avg * .30);
-      break;
+      buyPrice = Math.round(avg * .30)
+      break
 
     case "ulw":
-      buyPrice = Math.round(avg * .275);
-      break;
+      buyPrice = Math.round(avg * .275)
+      break
 
     case "umw":
-      buyPrice = Math.round(avg * .25);
-      break;
+      buyPrice = Math.round(avg * .25)
+      break
 
     case "uhw":
-      buyPrice = Math.round(avg * .225);
-      break;
+      buyPrice = Math.round(avg * .225)
+      break
 
     case "usf":
-      buyPrice = Math.round(avg * .20);
-      break;
+      buyPrice = Math.round(avg * .20)
+      break
 
     default:
-      return Math.round(avg * .30);
+      return Math.round(avg * .30)
   }
 
-  return buyPrice;
+  return buyPrice
 }
 
 //Cacluulate trade price based on condtion
@@ -227,37 +228,37 @@ function getTrdPrice(condition) {
   let avg = calculateAvg(this)
     switch (condition) {
       case "pom":
-        trdPrice = Math.round(avg * .35);
+        trdPrice = Math.round(avg * .35)
         break;
 
       case "ulw":
          trdPrice =  Math.round(avg * .30);
-         break;
+         break
 
       case "umw":
-         trdPrice =  Math.round(avg * .275);
-         break;
+         trdPrice =  Math.round(avg * .275)
+         break
 
       case "uhw":
-         trdPrice =  Math.round(avg * .25);
-         break;
+         trdPrice =  Math.round(avg * .25)
+         break
 
       case "usf":
-         trdPrice = Math.round(avg * .225);
-         break;
+         trdPrice = Math.round(avg * .225)
+         break
 
       default:
-         trdPrice = Math.round(avg * .35);
-         break;
+         trdPrice = Math.round(avg * .35)
+         break
     }
-    return trdPrice;
+    return trdPrice
   }
 
 
 
 function showPrices() {
 
-  let gearPrevious = gear;
+  let gearPrevious = gear
 
   $('.total').removeClass('hide')
   $('.item').removeClass('hide')
@@ -284,11 +285,11 @@ function showPrices() {
 
     //Insert per item prices into the DOM
     for (i=0; i<selectedNum; i++) {
-      $('.item-view').append(`<div class="grid-container"><div class="item-view-title">${gear[i].name} Buy Prices</div><div class="item-buy-prices-grid prices-grid hide"><span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
+      $('.item-view').append(`<div class="grid-container"><div aria-expanded="false" aria-controls="buy${i}" class="item-view-title">${gear[i].name} Buy Prices</div><div id="buy${i}" aria-hidden="true" class="item-buy-prices-grid prices-grid hide"><span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
       <span class="conditions-short">U.L.W</span>
       <span class="conditions-short">U.M.W</span>
       <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${gear[i].getBuyPrice("pom")}</span><span class="price">${gear[i].getBuyPrice("ulw")}</span><span class="price">${gear[i].getBuyPrice("umw")}</span><span class="price">${gear[i].getBuyPrice("uhw")}</span><span class="price">${gear[i].getBuyPrice("usf")}</span></div></div>`)
-      $('.item-view').append(`<div class="grid-container"><div class="item-view-title">${gear[i].name} Trade Prices</div><div class="item-trade-prices-gird prices-grid hide"><span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
+      $('.item-view').append(`<div class="grid-container"><div aria-expanded="false" aria-controls="trade${i}" class="item-view-title">${gear[i].name} Trade Prices</div><div id="trade${i}" aria-hidden="true" class="item-trade-prices-gird prices-grid hide"><span class="conditions">Mint</span><span class="conditions">Light Wear</span><span class="conditions">Medium Wear</span><span class="conditions">Heavy Wear</span><span class="conditions">Semi-functional</span> <span class="conditions-short">P.O.M</span>
       <span class="conditions-short">U.L.W</span>
       <span class="conditions-short">U.M.W</span>
       <span class="conditions-short">U.H.W</span><span class="conditions-short">U.S.F</span><span class="price">${gear[i].getTrdPrice("pom")}</span><span class="price">${gear[i].getTrdPrice("ulw")}</span><span class="price">${gear[i].getTrdPrice("umw")}</span><span class="price">${gear[i].getTrdPrice("uhw")}</span><span class="price">${gear[i].getTrdPrice("usf")}</span></div></div>`)
@@ -402,9 +403,9 @@ function getPrices() {
 
 //Verify each search result returns data from accepted category
 async function verifyData(searchObj) {
-
+  console.log(`searchObj.url: ${searchObj.url}`)
   try {
-    let response = await fetchJsonp(searchObj.url)
+    let response = await fetch(searchObj.url)
     let data = await response.json()
     responses.push(data)
     searchIDs.push(searchObj.id)
@@ -427,8 +428,8 @@ async function verifyData(searchObj) {
   if(verifyDataCounter == selectedNum) {
     //Check that all category ID's from the search exist in the list of accepted ID's
     isSuperset = catIDs.every(function (val) {
-      return acceptedCatIDs.indexOf(val) >= 0;
-    });
+      return acceptedCatIDs.indexOf(val) >= 0
+    })
 
 
     if(isSuperset == true) {
@@ -440,7 +441,7 @@ async function verifyData(searchObj) {
         term = term.replace(/\./g, '-')
 
         $('.item-header-tabs').append(`<button class="tab-item">${gearName[x].toUpperCase()}</button>`)
-        $('#resultsContainer').append(`<div class="searchResults ${term.toUpperCase()}" id="result${x}"></div>`)
+        $('#resultsContainer').append(`<div class="searchResults ${term.toUpperCase()}" id="result${x}" aria-live="polite"></div>`)
       }
 
       $('.item-header-tabs').append('<button type="button" class="tab-item calc-button">GET QUOTE</button>')
@@ -464,7 +465,6 @@ async function verifyData(searchObj) {
 
 
 function getSearchTerms(){
-  //onsole.log('get search terms running')
 
   $('.search-button').on('click', function(e){
     e.preventDefault()
@@ -505,9 +505,9 @@ function getSearchTerms(){
  }
 
  function buildRequestUrl(item) {
-     baseURL = "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&SERVICE-VERSION=1.7.0&SECURITY-APPNAME=RoryGarc-priceGen-PRD-55d8a3c47-c767674d&GLOBAL-ID=EBAY-US&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=";
+     baseURL = "https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&SERVICE-VERSION=1.7.0&SECURITY-APPNAME=RoryGarc-priceGen-PRD-55d8a3c47-c767674d&GLOBAL-ID=EBAY-US&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=";
      endURL = "&itemFilter(0).name=Condition&itemFilter(0).value=3000&itemFilter(1).name=SoldItemsOnly&itemFilter(1).value=true&paginationInput.entriesPerPage=12&paginationInput.pageNumber=1";
-     let requestUrl = baseURL.concat(item.split(' ').join('+'), endURL);
+     let requestUrl = baseURL.concat(item.split(' ').join('+'), endURL)
      return requestUrl
  }
 
@@ -554,10 +554,11 @@ function startQuote() {
   $('.num-opt').click(function(e){
     e.preventDefault()
     selectedNum = this.id;
+    $(this).attr('aria-selected', "true")
     createInputs(selectedNum)
   })
 
 
 }
 
-$(startQuote);
+$(startQuote)
